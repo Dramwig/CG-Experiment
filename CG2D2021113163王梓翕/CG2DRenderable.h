@@ -1,0 +1,60 @@
+#ifndef _CG2DRenderable_H_INCLUDED
+#define _CG2DRenderable_H_INCLUDED
+#include "CGObject.h"
+#include "AABBox2.h"
+//使用到如下类的指针，进行类预声明
+class CG2DRenderContext;
+class CG2DCamera;
+class CG2DScene;
+class CG2DRenderable : public CGObject
+{
+	DECLARE_SERIAL(CG2DRenderable)
+public:
+	CG2DRenderable();
+	CG2DRenderable(const CString& name);
+	CG2DRenderable(const CG2DRenderable& other) = default;
+	virtual ~CG2DRenderable() = default;
+	//序列化
+	virtual void Serialize(CArchive& ar) override;
+	//对象被添加到场景，建立与场景的关联
+	void addToScene(CG2DScene* s) { mScene = s; }
+	CG2DScene* scene() const { return mScene; }
+	//绘制
+	virtual void Render(CG2DRenderContext* pRC, CG2DCamera* pCamera); //绘制对象，使用指定相机
+	//一般二维图形属性（线宽、线型、颜色）
+	void setPenColor(COLORREF color) { mPenColor = color; }
+	COLORREF penColor() const { return mPenColor; }
+	void setPenWidth(int width) { mPenWidth = width; }
+	int penWidth() const { return mPenWidth; }
+	void setPenStyle(int style) { mPenStyle = style; }
+	int penStyle() const { return mPenStyle; }
+	//二维封闭图形填充属性
+	void setBrushColor(COLORREF color) { mBrushColor = color; }
+	COLORREF brushColor() const { return mBrushColor; }
+	void setBrushStyle(int style) { mBrushStyle = style; }
+	int brushStyle() const { return mBrushStyle; }
+	void setHatchStyle(int style) { mHatchStyle = style; }
+	int hatchStyle() const { return mHatchStyle; }
+	//包围盒与拾取相关
+	ABox2d& BoundingABox(); //AABB包围盒，可用于设置
+	bool boundsDirty() const { return mBoundsDirty; } //对象包围盒是否需要重新计算
+	void setBoundsDirty(bool dirty) { mBoundsDirty = dirty; } //设置包围盒是否需要重新计算
+	virtual void computeBoundingBox(); //计算对象的包围盒,必须在派生类中重写
+	//对象状态定义（也可用枚举类型）
+	static const int sNormal = 0; //正常状态
+	static const int sSelected = 1; //选中状态
+	int status() const { return mStatus; }
+	void setStatus(int s) { mStatus = s; }
+protected:
+	COLORREF mPenColor = RGB(0, 0, 0); //轮廓颜色
+	int mPenWidth = 1; //轮廓线宽
+	int mPenStyle = PS_SOLID; //轮廓线型
+	COLORREF mBrushColor = RGB(0, 0, 0); //画刷颜色
+	int mBrushStyle = BS_SOLID; //画刷样式
+	int mHatchStyle = HS_HORIZONTAL; //阴影样式
+	CG2DScene* mScene = nullptr; //对象实例所属的场景，当对象加入场景时自动进行设置。
+	ABox2d mABox;//轴对齐矩形包围盒，需要根据mBoundsDirty判断是否重新计算
+	bool mBoundsDirty = true; //包围盒是否已改变
+	int mStatus = 0; //状态
+};
+#endif //_CG2DRenderable_H_INCLUDED
