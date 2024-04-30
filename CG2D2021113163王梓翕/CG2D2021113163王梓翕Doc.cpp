@@ -40,6 +40,18 @@
 IMPLEMENT_DYNCREATE(CCG2D2021113163王梓翕Doc, CDocument)
 
 BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕Doc, CDocument)
+	ON_UPDATE_COMMAND_UI(ID_PEN_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdatePenColor)
+	ON_UPDATE_COMMAND_UI(ID_PEN_WIDTH, &CCG2D2021113163王梓翕Doc::OnUpdatePenWidth)
+	ON_UPDATE_COMMAND_UI(ID_PEN_STYLE, &CCG2D2021113163王梓翕Doc::OnUpdatePenStyle)
+	ON_UPDATE_COMMAND_UI(ID_BRUSH_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdateBrushColor)
+	ON_UPDATE_COMMAND_UI(ID_BRUSH_STYLE, &CCG2D2021113163王梓翕Doc::OnUpdateBrushStyle)
+	ON_UPDATE_COMMAND_UI(ID_BRUSH_HATCH, &CCG2D2021113163王梓翕Doc::OnUpdateBrushHatch)
+	ON_UPDATE_COMMAND_UI(ID_ALGOR_LINE, &CCG2D2021113163王梓翕Doc::OnUpdateAlgorLine)
+	ON_UPDATE_COMMAND_UI(ID_ALGOR_CIRCLE, &CCG2D2021113163王梓翕Doc::OnUpdateAlgorCircle)
+	ON_UPDATE_COMMAND_UI(ID_ALGOR_POLYGON, &CCG2D2021113163王梓翕Doc::OnUpdateAlgorPolygon)
+	ON_UPDATE_COMMAND_UI(ID_ALGOR_SEEDFILL, &CCG2D2021113163王梓翕Doc::OnUpdateAlgorSeedfill)
+	ON_UPDATE_COMMAND_UI(ID_BOUND_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdateBoundColor)
+	ON_UPDATE_COMMAND_UI(ID_INNER_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdateInnerColor)
 END_MESSAGE_MAP()
 
 BOOL CCG2D2021113163王梓翕Doc::OnNewDocument()
@@ -147,32 +159,32 @@ CCG2D2021113163王梓翕Doc::CCG2D2021113163王梓翕Doc() noexcept
 	mScene = new CG2DScene();
 	mCameras.Add(new CG2DCamera());
 
-	// 测试添加直线段到场景（要包含"CG2DLineSegment.h"），测试完毕后删除。
-	mScene->addRenderable(new CG2DLineSegment(Vec2d(100, 100), Vec2d(500, 200)));
-	mScene->addRenderable(new CG2DRay(Vec2d(-100, -100), Vec2d(-10, -20)));
-	mScene->addRenderable(new CG2DLine(Vec2d(0, 0), Vec2d(200, 500)));
+	//// 测试添加直线段到场景（要包含"CG2DLineSegment.h"），测试完毕后删除。
+	//mScene->addRenderable(new CG2DLineSegment(Vec2d(100, 100), Vec2d(500, 200)));
+	//mScene->addRenderable(new CG2DRay(Vec2d(-100, -100), Vec2d(-10, -20)));
+	//mScene->addRenderable(new CG2DLine(Vec2d(0, 0), Vec2d(200, 500)));
 
-	// 测试添加折线到场景中
-	CG2DPolyline* polyline = new CG2DPolyline();
-	polyline->addPoint(Vec2d(300, 300));
-	polyline->addPoint(Vec2d(400, 400));
-	polyline->addPoint(Vec2d(500, 300));
-	mScene->addRenderable(polyline);
+	//// 测试添加折线到场景中
+	//CG2DPolyline* polyline = new CG2DPolyline();
+	//polyline->addPoint(Vec2d(300, 300));
+	//polyline->addPoint(Vec2d(400, 400));
+	//polyline->addPoint(Vec2d(500, 300));
+	//mScene->addRenderable(polyline);
 
-	// 添加测试圆弧、圆到场景中
-	mScene->addRenderable(new CG2DArc(Vec2d(300, 300), 100, 0, PI / 2 * 3));
-	mScene->addRenderable(new CG2DCircle(Vec2d(0, 0), 100));
+	//// 添加测试圆弧、圆到场景中
+	//mScene->addRenderable(new CG2DArc(Vec2d(300, 300), 100, 0, PI / 2 * 3));
+	//mScene->addRenderable(new CG2DCircle(Vec2d(0, 0), 100));
 
-	// 测试添加多边形到场景中
-	CG2DPolygon* polygon = new CG2DPolygon();
-	polygon->addPoint(Vec2d(100, 100));
-	polygon->addPoint(Vec2d(200, 100));
-	polygon->addPoint(Vec2d(200, 200));
-	polygon->addPoint(Vec2d(100, 200));
-	mScene->addRenderable(polygon);
+	//// 测试添加多边形到场景中
+	//CG2DPolygon* polygon = new CG2DPolygon();
+	//polygon->addPoint(Vec2d(100, 100));
+	//polygon->addPoint(Vec2d(200, 100));
+	//polygon->addPoint(Vec2d(200, 200));
+	//polygon->addPoint(Vec2d(100, 200));
+	//mScene->addRenderable(polygon);
 
-	// 添加测试椭圆到场景中
-	mScene->addRenderable(new CG2DEllipse(Vec2d(0, 0), 100, 50));
+	//// 添加测试椭圆到场景中
+	//mScene->addRenderable(new CG2DEllipse(Vec2d(0, 0), 100, 50));
 }
 
 CCG2D2021113163王梓翕Doc::~CCG2D2021113163王梓翕Doc()
@@ -191,6 +203,7 @@ bool CCG2D2021113163王梓翕Doc::addRenderable(CG2DRenderable* r)
 	if (r && mScene && r->IsKindOf(RUNTIME_CLASS(CG2DRenderable)))
 	{
 		bool ret = mScene->addRenderable(r);
+		UpdateAllViews(nullptr); //添加成功更新显示
 		return ret;
 	}
 	return false;
@@ -200,6 +213,7 @@ bool CCG2D2021113163王梓翕Doc::delReaderable(CG2DRenderable* r)
 	if (r && mScene && r->IsKindOf(RUNTIME_CLASS(CG2DRenderable)))
 	{
 		bool ret = mScene->delRenderable(r);
+		UpdateAllViews(nullptr); //删除成功更新显示
 		return ret;
 	}
 	return false;
@@ -222,4 +236,274 @@ bool CCG2D2021113163王梓翕Doc::RenderScene(CG2DRenderContext* pRC)
 	bool ret = mScene->Render(pRC, pCamera);
 	pRC->Finish(pCamera);
 	return ret;
+}
+
+
+// 实验3-2
+void CCG2D2021113163王梓翕Doc::OnUpdatePenColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdatePenWidth(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdatePenStyle(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateBrushColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateBrushStyle(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateBrushHatch(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateAlgorLine(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateAlgorCircle(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateAlgorPolygon(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateAlgorSeedfill(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateBoundColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnUpdateInnerColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+//根据视口坐标获取对应场景坐标（二维）-调用默认相机的转换函数
+Vec2d CCG2D2021113163王梓翕Doc::ViewPorttoWorld(const Vec2i& p)
+{
+	return defaultCamera()->ViewPorttoWorld(p);
+}
+
+Vec2i CCG2D2021113163王梓翕Doc::WorldtoViewPort(const Vec2d& p)
+{
+	return defaultCamera()->WorldtoViewPort(p);
+}
+
+//更新选择（如果拾取对象成功，则替换选择集，返回拾取的对象）
+CG2DRenderable* CCG2D2021113163王梓翕Doc::UpdatePicked(const Vec2d& p, double radius) //点选
+{
+	if (mScene)
+	{
+		CG2DRenderable* r = mScene->UpdatePicked(p, radius);
+		if (r)
+		{
+			UpdateAllViews(nullptr);
+		}
+		return r;
+	}
+	return nullptr;
+}
+CG2DRenderable* CCG2D2021113163王梓翕Doc::UpdatePicked(const ABox2d& box, bool inner/* = true*/) //框选（包含才选中？）
+{
+	if (mScene)
+	{
+		CG2DRenderable* r = mScene->UpdatePicked(box, inner);
+		if (r)
+		{
+			UpdateAllViews(nullptr);
+		}
+		return r;
+	}
+	return nullptr;
+}
+//添加选择（如果拾取对象成功，则加入选择集，返回拾取的对象）
+CG2DRenderable* CCG2D2021113163王梓翕Doc::AppendPicked(const Vec2d& p, double radius) //点选
+{
+	if (mScene)
+	{
+		CG2DRenderable* r = mScene->AppendPicked(p, radius);
+		if (r)
+		{
+			UpdateAllViews(nullptr);
+		}
+		return r;
+	}
+	return nullptr;
+}
+CG2DRenderable* CCG2D2021113163王梓翕Doc::AppendPicked(const ABox2d& box, bool inner/* = true*/) //框选（包含才选中？）
+{
+	if (mScene)
+	{
+		CG2DRenderable* r = mScene->AppendPicked(box, inner);
+		if (r)
+		{
+			UpdateAllViews(nullptr);
+		}
+		return r;
+	}
+	return nullptr;
+}
+bool CCG2D2021113163王梓翕Doc::UnselectAll() //撤销所有对象选中状态
+{
+	if (mScene && mScene->UnselectAll())
+		UpdateAllViews(nullptr);
+	return false;
+}
+//二维图形对象的几何变换（针对选择集中的对象）
+bool CCG2D2021113163王梓翕Doc::Translate(double tx, double ty) //平移
+{
+	if (mScene && mScene->Translate(tx, ty))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::Rotate(double angle, double cx, double cy) //旋转（逆时针为=正，度）
+{
+	if (mScene && mScene->Rotate(angle, cx, cy))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::Scale(double sx, double sy) //缩放
+{
+	if (mScene && mScene->Scale(sx, sy))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::Scale(double sx, double sy, double cx, double cy) //缩放（关于指定参考点缩放）
+{
+	if (mScene && mScene->Scale(sx, sy, cx, cy))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::MirrorXAxis() //关于X轴对称（二维、三维）
+{
+	if (mScene && mScene->MirrorXAxis())
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::MirrorYAxis() //关于Y轴对称（二维、三维）
+{
+	if (mScene && mScene->MirrorYAxis())
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::MirrorYeqPosX()//关于y=x对称（二维、三维）
+{
+	if (mScene && mScene->MirrorYeqPosX())
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::MirrorYeNegPX()//关于y=-x对称（二维、三维）
+{
+	if (mScene && mScene->MirrorYeNegPX())
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::MirrorOrigin() //关于原点对称（二维、三维）
+{
+	if (mScene && mScene->MirrorOrigin())
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::Mirror(const Vec2d& vs, const Vec2d& ve) //关于线段se对称（二维、三维）
+{
+	if (mScene && mScene->Mirror(vs, ve))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::ShearXAxis(double shx) //沿X轴错切
+{
+	if (mScene && mScene->ShearXAxis(shx))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::ShearYAxis(double shy) //沿Y轴错切
+{
+	if (mScene && mScene->ShearYAxis(shy))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::ShearXYAxis(double shx, double shy) //沿X、Y轴错切
+{
+	if (mScene && mScene->ShearXYAxis(shx, shy))
+	{
+		return true;
+	}
+	return false;
+}
+bool CCG2D2021113163王梓翕Doc::Transform(const Mat3d & mat) //几何变换（左乘给定矩阵）
+{
+	if (mScene && mScene->Transform(mat))
+	{
+		return true;
+	}
+	return false;
 }

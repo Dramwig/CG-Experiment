@@ -142,3 +142,353 @@ ABox2d CG2DScene::BoundingABox()
 	}
 	return box;
 }
+
+//更新选择（如果拾取对象成功，则替换选择集，返回拾取的对象）
+CG2DRenderable* CG2DScene::UpdatePicked(const Vec2d& p, double radius) //点选
+{
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt) //遍历场景中的所有图形对象，判断是否拾取到
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r && r->Picked(p, radius))
+		{
+			UnselectAll(); //替换前先清空选择集         !!!和AppendPicked不一样的地方
+			r->setStatus(CG2DRenderable::sSelected);
+			mSelections.Add(r); //加入选择集
+			return r; //假定只选中一个
+		}
+		i++;
+	}
+	return nullptr;
+}
+CG2DRenderable* CG2DScene::UpdatePicked(const ABox2d& box, bool inner/* = true*/) //框选
+{
+	//TODO：自行补充实现
+	size_t i = 0, cnt = mRenderables.GetSize();
+	UnselectAll(); //替换前先清空选择集         !!!和AppendPicked不一样的地方
+	CG2DRenderable* r = nullptr;
+	while (i < cnt) //遍历场景中的所有图形对象，判断是否拾取到
+	{
+		r = mRenderables.GetAt(i);
+		if (r && r->Picked(box))
+		{
+			r->setStatus(CG2DRenderable::sSelected);
+			mSelections.Add(r); //加入选择集
+		}
+		i++;
+	}
+	return r;
+}
+//添加选择（如果拾取对象成功，则加入选择集，返回拾取的对象）
+CG2DRenderable* CG2DScene::AppendPicked(const Vec2d& p, double radius) //点选
+{
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt) //遍历场景中的所有图形对象，判断是否拾取到
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r && r->Picked(p, radius))
+		{
+			r->setStatus(CG2DRenderable::sSelected);
+			mSelections.Add(r); //加入选择集
+			return r;
+		}
+		i++;
+	}
+	return nullptr;
+}
+CG2DRenderable* CG2DScene::AppendPicked(const ABox2d& box, bool inner/* = true*/) //框选
+{
+	//TODO：自行补充实现
+	size_t i = 0, cnt = mRenderables.GetSize();
+	CG2DRenderable* r = nullptr;
+	while (i < cnt) //遍历场景中的所有图形对象，判断是否拾取到
+	{
+		r = mRenderables.GetAt(i);
+		if (r && r->Picked(box))
+		{
+			r->setStatus(CG2DRenderable::sSelected);
+			mSelections.Add(r); //加入选择集
+		}
+		i++;
+	}
+	return r;
+}
+//按图形对象名称选取（如有该对象，则加入选择集，返回选取的对象）
+CG2DRenderable* CG2DScene::Selected(const CString& name)
+{
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r && r->Name() == name && r->status() != CG2DRenderable::sSelected)
+		{
+			r->setStatus(CG2DRenderable::sSelected); //设置对象的状态为选中
+			mSelections.Add(r); //加入选择集
+			return r;
+		}
+		i++;
+	}
+	return nullptr;
+}
+bool CG2DScene::Unselect(const CString& name) //撤销指定对象选中状态
+{
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r && r->Name() == name)
+		{
+			return Unselect(r); //撤销选中状态
+		}
+		i++;
+	}
+	return false;
+}
+bool CG2DScene::Unselect(CG2DRenderable* r) //撤销指定对象选中状态
+{
+	if (r)
+		r->setStatus(CG2DRenderable::sNormal); //设置对象状态为正常
+	size_t i = 0, cnt = mSelections.GetSize();
+	while (i < cnt) //从选择集中清除
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s == r)
+		{
+			mSelections.RemoveAt(i);
+			return true; //如果有对象撤销选中状态
+		}
+		i++;
+	}
+	return false;
+}
+bool CG2DScene::UnselectAll() //撤销所有对象选中状态
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->setStatus(CG2DRenderable::sNormal);
+		i++;
+	}
+	mSelections.RemoveAll();
+	if (cnt > 0) //如果有选中对象被清除标记
+		return true;
+	return false;
+}
+bool CG2DScene::SelectAll() //所有对象设为选中
+{
+	mSelections.RemoveAll();
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r)
+		{
+			r->setStatus(CG2DRenderable::sSelected);
+			mSelections.Add(r);
+		}
+		i++;
+	}
+	if (cnt > 0) //如果有选中对象设置选中标记
+		return true;
+	return false;
+}
+
+//二维图形对象的几何变换（针对选择集中的对象）
+bool CG2DScene::Translate(double tx, double ty) //平移
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Translate(tx, ty);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::Rotate(double angle, double cx, double cy) //旋转（逆时针为正，度）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Rotate(angle, cx, cy);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::Scale(double sx, double sy) //缩放
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Scale(sx, sy);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::Scale(double sx, double sy, double cx, double cy) //缩放（关于指定参考点缩放）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Scale(sx, sy, cx, cy);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::MirrorXAxis() //关于X轴对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->MirrorXAxis();
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::MirrorYAxis() //关于Y轴对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->MirrorYAxis();
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::MirrorYeqPosX() //关于y=x对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->MirrorYeqPosX();
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::MirrorYeNegPX() //关于y=-x对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->MirrorYeNegPX();
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::MirrorOrigin() //关于原点对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->MirrorOrigin();
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::Mirror(const Vec2d& vs, const Vec2d& ve) //关于线段se对称（二维、三维）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Mirror(vs, ve);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::ShearXAxis(double shx) //沿X轴错切
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->ShearXAxis(shx);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::ShearYAxis(double shy) //沿Y轴错切
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->ShearYAxis(shy);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::ShearXYAxis(double shx, double shy) //沿X、Y轴错切
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->ShearXYAxis(shx, shy);
+		i++;
+	}
+	return true;
+}
+bool CG2DScene::Transform(const Mat3d& mat) //几何变换（左乘给定矩阵）
+{
+	size_t i = 0, cnt = mSelections.GetSize();
+	if (cnt == 0)
+		return false;
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mSelections.GetAt(i);
+		if (s)
+			s->Transform(mat);
+		i++;
+	}
+	return true;
+}

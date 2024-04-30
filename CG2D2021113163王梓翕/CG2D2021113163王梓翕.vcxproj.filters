@@ -99,6 +99,36 @@
     <ClInclude Include="CG2DEllipse.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CG2DLineSegmentCreateCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DPolylineCreateCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DPolygonCreateCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DCircleCenterRadiusCreateCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DRenderablePickCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix22.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix33.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DRenderablePickInBoxCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DRenderableMoveCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG2DRenderableRotateCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CG2D2021113163王梓翕.cpp">
@@ -173,6 +203,36 @@
     <ClCompile Include="CG2DEllipse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CG2DLineSegmentCreateCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DPolylineCreateCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DPolygonCreateCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DCircleCenterRadiusCreateCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DRenderablePickCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix22.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix33.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DRenderablePickInBoxCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DRenderableMoveCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG2DRenderableRotateCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CG2D2021113163王梓翕.reg" />
@@ -182,6 +242,7 @@
     <None Include="res\CG2D2021113163.rc2">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CG2D2021113163.rc">

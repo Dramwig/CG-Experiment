@@ -1,10 +1,9 @@
-#ifndef _CG2DPOLYLINE_H_INCLUDED
-#define _CG2DPOLYLINE_H_INCLUDED
-
+#pragma once
 #include "Vector2.h"
 #include "CG2DRenderable.h"
+#include <vector>
 
-class CG2DPolyline : public CG2DRenderable {\
+class CG2DPolyline : public CG2DRenderable {
     DECLARE_SERIAL(CG2DPolyline)
 public:
     CG2DPolyline();
@@ -23,9 +22,18 @@ public:
 
     // 添加点
     void addPoint(const Vec2d& point);
+    void addPoint(const CPoint& point);
+    int size();
+    void clear();
+    bool empty();
+    CPoint back();
+    void pop();
+    // 返回对mPoints的引用，允许读写操作
+    std::vector<Vec2d>& getPoints() {
+        return mPoints;
+    }
 
 protected:
     std::vector<Vec2d> mPoints; // 折线上的点集合
 };
 
-#endif // _CG2DPOLYLINE_H_INCLUDED

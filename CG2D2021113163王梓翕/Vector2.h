@@ -27,6 +27,7 @@ public:
 	Vector2() { elements[0] = 0; elements[1] = 0; }
 	~Vector2() = default;
 	Vector2(const Vector2& other) { elements[0] = other.x(); elements[1] = other.y(); }
+	Vector2(CPoint point) { elements[0] = (T)point.x; elements[1] = (T)point.y; }
 	// 从其他基本类型的Vector2构造
 	template<typename S> explicit Vector2(const Vector2<S>& other)
 	{

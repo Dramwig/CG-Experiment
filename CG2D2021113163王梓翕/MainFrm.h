@@ -55,6 +55,28 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
 
+// 实验3-2
+public:
+	//画笔属性
+	COLORREF PenColor() const;
+	int PenWidth() const;
+	int PenStyle() const;
+	//画刷属性
+	COLORREF BrushColor() const;
+	int BrushStyle() const;
+	int HatchStyle() const;
+	//绘制算法（重写的基类的虚函数）
+	int LineAlgorithm() const;
+	int CircleAlgorithm() const;
+	int FillAlgorithm() const;
+	int SeedAlgorithm() const;
+	//点阵区域的边界颜色
+	COLORREF BoundColor() const;
+	//点阵区域的内点颜色
+	COLORREF FloodColor() const;
+public:
+	void ShowPrompt(const CString& str);
+	void ShowCoordOnStatusBar(const CString& str);
 };
 
 

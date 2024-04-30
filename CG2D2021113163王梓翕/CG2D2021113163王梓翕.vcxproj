@@ -185,6 +185,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AABBox2.h" />
+    <ClInclude Include="CG2DCircleCenterRadiusCreateCommand.h" />
     <ClInclude Include="CG2D2021113163王梓翕.h" />
     <ClInclude Include="CG2D2021113163王梓翕Doc.h" />
     <ClInclude Include="CG2D2021113163王梓翕View.h" />
@@ -194,10 +195,17 @@
     <ClInclude Include="CG2DEllipse.h" />
     <ClInclude Include="CG2DLine.h" />
     <ClInclude Include="CG2DLineSegment.h" />
+    <ClInclude Include="CG2DLineSegmentCreateCommand.h" />
     <ClInclude Include="CG2DPolygon.h" />
+    <ClInclude Include="CG2DPolygonCreateCommand.h" />
     <ClInclude Include="CG2DPolyline.h" />
+    <ClInclude Include="CG2DPolylineCreateCommand.h" />
     <ClInclude Include="CG2DRay.h" />
     <ClInclude Include="CG2DRenderable.h" />
+    <ClInclude Include="CG2DRenderableMoveCommand.h" />
+    <ClInclude Include="CG2DRenderablePickCommand.h" />
+    <ClInclude Include="CG2DRenderablePickInBoxCommand.h" />
+    <ClInclude Include="CG2DRenderableRotateCommand.h" />
     <ClInclude Include="CG2DRenderContext.h" />
     <ClInclude Include="CG2DScene.h" />
     <ClInclude Include="CG2DViewPort.h" />
@@ -206,6 +214,8 @@
     <ClInclude Include="CSceneTreeView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Matrix22.h" />
+    <ClInclude Include="Matrix33.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -215,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABBox2.cpp" />
+    <ClCompile Include="CG2DCircleCenterRadiusCreateCommand.cpp" />
     <ClCompile Include="CG2D2021113163王梓翕.cpp" />
     <ClCompile Include="CG2D2021113163王梓翕Doc.cpp" />
     <ClCompile Include="CG2D2021113163王梓翕View.cpp" />
@@ -224,16 +235,25 @@
     <ClCompile Include="CG2DEllipse.cpp" />
     <ClCompile Include="CG2DLine.cpp" />
     <ClCompile Include="CG2DLineSegment.cpp" />
+    <ClCompile Include="CG2DLineSegmentCreateCommand.cpp" />
     <ClCompile Include="CG2DPolygon.cpp" />
+    <ClCompile Include="CG2DPolygonCreateCommand.cpp" />
     <ClCompile Include="CG2DPolyline.cpp" />
+    <ClCompile Include="CG2DPolylineCreateCommand.cpp" />
     <ClCompile Include="CG2DRay.cpp" />
     <ClCompile Include="CG2DRenderable.cpp" />
+    <ClCompile Include="CG2DRenderableMoveCommand.cpp" />
+    <ClCompile Include="CG2DRenderablePickCommand.cpp" />
+    <ClCompile Include="CG2DRenderablePickInBoxCommand.cpp" />
+    <ClCompile Include="CG2DRenderableRotateCommand.cpp" />
     <ClCompile Include="CG2DRenderContext.cpp" />
     <ClCompile Include="CG2DScene.cpp" />
     <ClCompile Include="CG2DViewPort.cpp" />
     <ClCompile Include="CGObject.cpp" />
     <ClCompile Include="CSceneTreeView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Matrix22.cpp" />
+    <ClCompile Include="Matrix33.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -246,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CG2D2021113163王梓翕.reg" />
+    <None Include="ClassDiagram.cd" />
     <None Include="res\CG2D2021113163.rc2" />
     <None Include="res\ribbon.mfcribbon-ms" />
   </ItemGroup>

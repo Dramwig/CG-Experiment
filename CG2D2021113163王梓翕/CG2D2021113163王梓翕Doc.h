@@ -18,7 +18,7 @@
 #include "CG2DCamera.h"
 #include "CG2DRenderContext.h"
 #include "CG2DRenderable.h"
-
+#include "AABBox2.h"
 
 class CCG2D2021113163王梓翕Doc : public CDocument
 {
@@ -72,4 +72,46 @@ public:
 	//图形对象添加到场景
 	bool addRenderable(CG2DRenderable* r);
 	bool delReaderable(CG2DRenderable* r);
+	afx_msg void OnUpdatePenColor(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePenWidth(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePenStyle(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateBrushColor(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateBrushStyle(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateBrushHatch(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateAlgorLine(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateAlgorCircle(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateAlgorPolygon(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateAlgorSeedfill(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateBoundColor(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateInnerColor(CCmdUI* pCmdUI);
+
+//3-2
+public:
+	//根据视口坐标获取对应场景坐标（二维）-调用默认相机的转换函数
+	Vec2d ViewPorttoWorld(const Vec2i& p);
+	Vec2i WorldtoViewPort(const Vec2d& p);
+public:
+	//更新选择（如果拾取对象成功，则替换选择集，返回拾取的对象）
+	CG2DRenderable* UpdatePicked(const Vec2d& p, double radius); //点选
+	CG2DRenderable* UpdatePicked(const ABox2d& box, bool inner = true); //框选（包含才选中？）
+	//添加选择（如果拾取对象成功，则加入选择集，返回拾取的对象）
+	CG2DRenderable* AppendPicked(const Vec2d& p, double radius); //点选
+	CG2DRenderable* AppendPicked(const ABox2d& box, bool inner = true); //框选（包含才选中？）
+	bool UnselectAll(); //撤销所有对象选中状态
+public:
+	//图形几何变换
+	bool Translate(double tx, double ty); //平移
+	bool Rotate(double angle, double cx, double cy); //旋转（逆时针为正，度）
+	bool Scale(double sx, double sy); //缩放（关于坐标原点缩放）
+	bool Scale(double sx, double sy, double cx, double cy); //缩放（关于指定参考点缩放）
+	bool MirrorXAxis(); //关于X轴对称（二维）
+	bool MirrorYAxis(); //关于Y轴对称（二维）
+	bool MirrorYeqPosX(); //关于y=x对称（二维）
+	bool MirrorYeNegPX(); //关于y=-x对称（二维）
+	bool MirrorOrigin(); //关于原点对称（二维）
+	bool Mirror(const Vec2d& vs, const Vec2d& ve); //关于线段se对称（二维）
+	bool ShearXAxis(double shx); //沿X轴错切
+	bool ShearYAxis(double shy); //沿Y轴错切
+	bool ShearXYAxis(double shx, double shy); //沿X、Y轴错切
+	bool Transform(const Mat3d& mat); //几何变换（左乘给定矩阵）
 };

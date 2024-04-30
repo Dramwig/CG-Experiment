@@ -20,5 +20,7 @@ public:
 	virtual void computeBoundingBox(); //计算包围盒
 protected:
 	Vec2d mStart, mEnd; //起点、终点坐标
+public:
+	virtual bool Picked(const Vec2d& p, double radius); //（二维）是否拾取到
 };
 #endif //_CG2DLineSegment_H_INCLUDED

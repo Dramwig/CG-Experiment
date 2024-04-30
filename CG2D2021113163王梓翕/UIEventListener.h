@@ -27,10 +27,12 @@ enum class CommandType //操作命令类型，参考如下定义，可根据需要修改
 	cmd2dScaleRenderable = 102,
 	cmd2dMirrorRenderable = 103,
 	cmd2dShearRenderable = 104,
+	cmd2dMoveRenderable = 105,
 	cmd2dMoveCamera = 110,
 	cmd2dRotateCamera = 111,
 	cmd2dZoomCamera = 112,
-	cmd2dPickRenderable = 120,
+	cmd2dPickRenderable = 115,
+	cmd2dPickInBoxRenderable = 117,
 	cmd2dRectClip = 121,
 	cmd2dPolyClip = 122,
 	cmdUnknown = 1000

@@ -54,9 +54,11 @@ void CG2DLineSegment::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera) //绘制
 	if (pRC == nullptr || pCamera == nullptr)
 		return;
 	HDC hDC = pRC->GetMemHDC();
-	//绘制线段对象，线段对象的数据是基于世界坐标系，绘制时要转换到设备坐标系
-	Vec2i v1 = pCamera->WorldtoViewPort(mStart);
-	Vec2i v2 = pCamera->WorldtoViewPort(mEnd);
+	//使用变换矩阵后图形的绘制要使用矩阵计算
+	Vec3d s = mMat * Vec3d(mStart); //计算实际起点
+	Vec3d e = mMat * Vec3d(mEnd); //计算实际终点
+	Vec2i v1 = pCamera->WorldtoViewPort(Vec2d(s.x(), s.y()));
+	Vec2i v2 = pCamera->WorldtoViewPort(Vec2d(e.x(), e.y()));
 	//测试算法
 	int algrithm = pRC->LineAlgorithm(); //通过绘制环境对应的View获取Ribbon面板中选中的直线段绘制算法
 	if (algrithm == (int)LineAlgorithm::CDC)
@@ -69,6 +71,7 @@ void CG2DLineSegment::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera) //绘制
 			::LineTo(hDC, v2.x(), v2.y());
 			::SelectObject(hDC, hOldPen); //恢复原绘制环境的画笔
 		}
+
 	}
 	else if (algrithm == (int)LineAlgorithm::DDA)
 		pRC->DDALine(v1.x(), v1.y(), v2.x(), v2.y(), penColor());
@@ -76,12 +79,45 @@ void CG2DLineSegment::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera) //绘制
 		pRC->MidPointLine(v1.x(), v1.y(), v2.x(), v2.y(), penColor());
 	else if (algrithm == (int)LineAlgorithm::Bresenham)
 		pRC->BresenhamLine(v1.x(), v1.y(), v2.x(), v2.y(), penColor());
+	//此处仅以绘制对象包围盒的方式显示对象被选中，也可以自行确定选中显示方式
+	DrawSelectedBoundingBox(hDC, this, pCamera);
 }
+
 //包围盒与拾取相关
 void CG2DLineSegment::computeBoundingBox() //计算包围盒
 {
-	mABox.setNull(); //先清空
-	mABox.addPoint(mStart); //起点
-	mABox.addPoint(mEnd); //终点
-	setBoundsDirty(false); //设置包围盒已经计算
+	mABox.setNull();  //先清空
+	Vec3d s = mMat * Vec3d(mStart);		//计算实际起点
+	Vec3d e = mMat * Vec3d(mEnd);		//计算实际终点
+	mABox.addPoint(Vec2d(s.x(), s.y()));	//起点
+	mABox.addPoint(Vec2d(e.x(), e.y()));	//终点
+	setBoundsDirty(false);
+}
+
+bool CG2DLineSegment::Picked(const Vec2d& p, double radius) //是否拾取到
+{
+	//（给定位置和范围，范围r可以根据需要设为圆半径或正方形边长的一半）
+	ABox2d abox = BoundingABox();
+	ABox2d sbox(p, radius);
+	if (abox.intersects(sbox)) //如果点在线段包围盒内，进一步判断距离
+	{
+		//点到直线段的距离（矢量法：P点到线段SE）
+		Vec2d ES = mEnd - mStart;
+		Vec2d PS = p - mStart;
+		Vec2d PE = p - mEnd;
+		double c = ES.dot(PS);//ES*PS
+		if (c <= 0) //P点在ES延长线方向
+			return false; //return PS.length();
+		double d = ES.lengthSquared();
+		if (c >= d) //P点在SE延长线方向
+			return false; //return (PE.length());
+		double r = c / d;
+		double px = mStart.x() + (mEnd.x() - mStart.x()) * r;
+		double py = mStart.y() + (mEnd.y() - mStart.y()) * r;
+		Vec2d S = Vec2d(px, py);
+		double dis = (p - S).length();
+		if (dis <= radius)
+			return true;
+	}
+	return false;
 }

@@ -29,6 +29,7 @@
 IMPLEMENT_DYNCREATE(CSceneTreeView, CTreeView)
 
 BEGIN_MESSAGE_MAP(CSceneTreeView, CTreeView)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CSceneTreeView::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
 
@@ -81,3 +82,72 @@ CCG2D2021113163王梓翕Doc* CSceneTreeView::GetDocument() // 非调试版本是
 
 
 // CSceneTreeView 消息处理程序
+
+
+void CSceneTreeView::OnTvnSelchanged(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	// TODO: 在此添加控件通知处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	if (!pDoc->scene())
+		return;
+	CTreeCtrl& treeCtrl = GetTreeCtrl();
+	HTREEITEM hItem = treeCtrl.GetSelectedItem();
+	if (hItem != NULL) {
+		HTREEITEM parent = treeCtrl.GetNextItem(hItem, TVGN_PARENT);
+		if (parent != nullptr)
+		{
+			CString strText = treeCtrl.GetItemText(parent);
+			if (strText == _T("图形对象"))
+			{
+				strText = treeCtrl.GetItemText(hItem);
+				//实现单选（每次只选一个），先清空选择集
+				bool ret = pDoc->scene()->UnselectAll();
+				//有清除标记或被选中，更新显示
+				if (pDoc->scene()->Selected(strText) != nullptr || ret == true)
+				{
+					pDoc->UpdateAllViews(nullptr);
+				}
+			}
+		}
+	}
+	*pResult = 0;
+}
+
+void CSceneTreeView::UpdateSceneTree() //根据文档中的场景更新场景树的显示
+{
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	if (!pDoc->scene())
+		return;
+	CTreeCtrl& treeCtrl = GetTreeCtrl();
+	treeCtrl.DeleteAllItems();
+	HTREEITEM hRoot = treeCtrl.InsertItem(_T("图形场景"), 0, 0);
+	treeCtrl.SetItemState(hRoot, TVIS_BOLD, TVIS_BOLD);
+	HTREEITEM hClass = treeCtrl.InsertItem(_T("图形对象"), 1, 1, hRoot);
+	CG2DRenderable* pr = nullptr;
+	unsigned i = 0;
+	while (pr = pDoc->scene()->getRenderable(i))
+	{
+		//Name是从CGObject继承，可以使用Name()="...."进行对象命名
+		HTREEITEM hitem = treeCtrl.InsertItem(pr->Name(), 3, 3, hClass);
+		if (pr->status() == CG2DRenderable::sSelected)
+		{
+		}
+		i++;
+	}
+	treeCtrl.Expand(hRoot, TVE_EXPAND);
+	treeCtrl.Expand(hClass, TVE_EXPAND);
+}
+
+
+void CSceneTreeView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
+{
+	// TODO: 在此添加专用代码和/或调用基类
+	UpdateSceneTree();
+}

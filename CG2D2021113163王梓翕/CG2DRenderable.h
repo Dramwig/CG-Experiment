@@ -2,6 +2,8 @@
 #define _CG2DRenderable_H_INCLUDED
 #include "CGObject.h"
 #include "AABBox2.h"
+#include "Matrix33.h"
+#include "CG2DCamera.h"
 //使用到如下类的指针，进行类预声明
 class CG2DRenderContext;
 class CG2DCamera;
@@ -56,5 +58,26 @@ protected:
 	ABox2d mABox;//轴对齐矩形包围盒，需要根据mBoundsDirty判断是否重新计算
 	bool mBoundsDirty = true; //包围盒是否已改变
 	int mStatus = 0; //状态
+public:
+	virtual bool Picked(const Vec2d& p, double radius); //（二维）是否拾取到
+	virtual bool Picked(const ABox2d& box); //（二维）是否拾取到
+	virtual void DrawSelectedBoundingBox(HDC hDC, CG2DRenderable* renderable, CG2DCamera* pCamera); //绘制选中包围盒
+	//图形几何变换
+	virtual void Translate(double tx, double ty); //平移
+	virtual void Rotate(double angle, double cx, double cy); //旋转（逆时针为正，度）
+	virtual void Scale(double sx, double sy); //缩放（关于坐标原点缩放）
+	virtual void Scale(double sx, double sy, double cx, double cy); //缩放（关于指定参考点缩放）
+	virtual void MirrorXAxis(); //关于X轴对称（二维）
+	virtual void MirrorYAxis(); //关于Y轴对称（二维）
+	virtual void MirrorYeqPosX(); //关于y=x对称（二维）
+	virtual void MirrorYeNegPX(); //关于y=-x对称（二维）
+	virtual void MirrorOrigin(); //关于原点对称（二维）
+	virtual void Mirror(const Vec2d& vs, const Vec2d& ve); //关于线段se对称（二维）
+	virtual void ShearXAxis(double shx); //沿X轴错切
+	virtual void ShearYAxis(double shy); //沿Y轴错切
+	virtual void ShearXYAxis(double shx, double shy); //沿X、Y轴错切
+	virtual void Transform(const Mat3d& mat); //几何变换（左乘给定矩阵）
+protected:
+	Mat3d mMat; //到父级坐标系的变换（列向量形式）
 };
 #endif //_CG2DRenderable_H_INCLUDED

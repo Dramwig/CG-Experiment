@@ -123,3 +123,114 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 // CMainFrame 消息处理程序
 
+//画笔属性
+COLORREF CMainFrame::PenColor() const
+{
+	CMFCRibbonColorButton* pPenColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_PEN_COLOR);
+	if (pPenColor)
+		return pPenColor->GetColor();
+	return RGB(0, 0, 0);
+}
+int CMainFrame::PenWidth() const
+{
+	CMFCRibbonEdit* pPenWidth = (CMFCRibbonEdit*)m_wndRibbonBar.FindByID(ID_PEN_WIDTH);
+	if (pPenWidth)
+		return _ttoi(pPenWidth->GetEditText());
+	return 1;
+}
+int CMainFrame::PenStyle() const
+{
+	CMFCRibbonComboBox* pPenStyle = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_PEN_STYLE);
+	if (pPenStyle)
+		return pPenStyle->GetCurSel();
+	return 0;
+}
+//画刷属性
+COLORREF CMainFrame::BrushColor() const
+{
+	CMFCRibbonColorButton* pBrushColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_BRUSH_COLOR);
+	if (pBrushColor)
+		return pBrushColor->GetColor();
+	return RGB(255, 255, 255);
+}
+int CMainFrame::BrushStyle() const
+{
+	CMFCRibbonComboBox* pBrushStyle = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_BRUSH_STYLE);
+	if (pBrushStyle)
+		return pBrushStyle->GetCurSel();
+	return -1;
+}
+int CMainFrame::HatchStyle() const
+{
+	CMFCRibbonComboBox* pHatchStyle = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_BRUSH_HATCH);
+	if (pHatchStyle)
+		return pHatchStyle->GetCurSel();
+	return -1;
+}
+//绘制算法
+int CMainFrame::LineAlgorithm() const
+{
+	CMFCRibbonComboBox* pLineAlgorithm =
+		(CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_ALGOR_LINE);
+	if (pLineAlgorithm)
+		return pLineAlgorithm->GetCurSel();
+	return 0;
+}
+int CMainFrame::CircleAlgorithm() const
+{
+	CMFCRibbonComboBox* pCircleAlgorithm =
+		(CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_ALGOR_CIRCLE);
+	if (pCircleAlgorithm)
+		return pCircleAlgorithm->GetCurSel();
+	return 0;
+}
+int CMainFrame::FillAlgorithm() const
+{
+	CMFCRibbonComboBox* pFillAlgorithm =
+		(CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_ALGOR_POLYGON);
+	if (pFillAlgorithm)
+		return pFillAlgorithm->GetCurSel();
+	return 0;
+}
+int CMainFrame::SeedAlgorithm() const
+{
+	CMFCRibbonComboBox* pFillAlgorithm =
+		(CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_ALGOR_SEEDFILL);
+	if (pFillAlgorithm)
+		return pFillAlgorithm->GetCurSel();
+	return 0;
+}
+//点阵区域的边界颜色
+COLORREF CMainFrame::BoundColor() const
+{
+	CMFCRibbonColorButton* pBoundColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_BOUND_COLOR);
+	if (pBoundColor)
+		return pBoundColor->GetColor();
+	return RGB(0, 0, 0);
+}
+//点阵区域的内点颜色
+COLORREF CMainFrame::FloodColor() const
+{
+	CMFCRibbonColorButton* pBackColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_INNER_COLOR);
+	if (pBackColor)
+		return pBackColor->GetColor();
+	return RGB(255, 255, 255);
+}
+//在状态栏上显示提示信息
+void CMainFrame::ShowPrompt(const CString& str)
+{
+	m_wndStatusBar.GetElement(0)->SetText(str);
+	m_wndStatusBar.Invalidate();
+	m_wndStatusBar.UpdateWindow();
+}
+//在状态栏上显示视口坐标、世界坐标
+void CMainFrame::ShowCoordOnStatusBar(const CString& str)
+{
+	m_wndStatusBar.GetExElement(0)->SetText(str);
+	m_wndStatusBar.Invalidate();
+	m_wndStatusBar.UpdateWindow();
+}

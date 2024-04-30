@@ -49,6 +49,11 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
+public:
+	afx_msg void OnTvnSelchanged(NMHDR* pNMHDR, LRESULT* pResult);
+public:
+	void UpdateSceneTree(); //根据文档中的场景更新场景树的显示
 };
 
 #ifndef _DEBUG  // CSceneTreeView.cpp 中的调试版本
