@@ -134,4 +134,10 @@ public:
 	void CameraViewportSet(int width, int height);
 	void CameraViewportReset();
 	void CameraAspectRatio();
+public: //实验参考6
+	//动画定时回调（如果场景有更新需要重绘则返回true） 
+	bool TimerCallback();
+	afx_msg void OnBtnParticle();
+	afx_msg void OnBtnFireworks();
+	afx_msg void OnBtnRemoveall();
 };

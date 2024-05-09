@@ -28,6 +28,7 @@
 #include <utility>
 #include "CG2DCamera.h"
 #include "CG2DRenderable.h"
+#include "CG2DLineSegment.h"
 #include "CG2DLineSegmentCreateCommand.h"
 #include "CG2DPolylineCreateCommand.h"
 #include "CG2DPolygonCreateCommand.h"
@@ -140,6 +141,9 @@ BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕View, CView)
 	ON_COMMAND(ID_WINDOW_OVERALL, &CCG2D2021113163王梓翕View::OnWindowOverall)
 	ON_COMMAND(ID_Aspect_Ratio, &CCG2D2021113163王梓翕View::OnAspectRatio)
 	ON_COMMAND(ID_REMOVE_ALL, &CCG2D2021113163王梓翕View::OnRemoveAll)
+	ON_COMMAND(ID_BTN_TIMER1, &CCG2D2021113163王梓翕View::OnBtnTimer1)
+	ON_UPDATE_COMMAND_UI(ID_BTN_TIMER1, &CCG2D2021113163王梓翕View::OnUpdateBtnTimer1)
+	ON_COMMAND(ID_BTN_FIREWORKS, &CCG2D2021113163王梓翕View::OnBtnFireworks)
 END_MESSAGE_MAP()
 
 // CCG2D2021113163王梓翕View 构造/析构
@@ -893,7 +897,12 @@ void CCG2D2021113163王梓翕View::OnDestroy()
 {
 	__super::OnDestroy();
 
-	// TODO: 在此处添加消息处理程序代码
+	// TODO: 在此处添加消息处理程序代码 
+	if (mAnimateTimer != 0)
+	{
+		KillTimer(mAnimateTimer);
+		mAnimateTimer = 0;
+	}
 }
 
 
@@ -1043,8 +1052,19 @@ void CCG2D2021113163王梓翕View::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CCG2D2021113163王梓翕View::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-
+	// TODO: 在此添加消息处理程序代码和/或调用默认值 
+	if (mAnimateTimer == nIDEvent)
+	{
+		CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+		if (pDoc)
+		{
+			if (pDoc->TimerCallback())
+			{
+				Invalidate();
+				//UpdateWindow(); 
+			}
+		}
+	}
 	__super::OnTimer(nIDEvent);
 }
 
@@ -1913,5 +1933,41 @@ void CCG2D2021113163王梓翕View::OnRemoveAll()
 	{
 		pDoc->clearScene(); //假定每次移动5个单位
 		Invalidate(true); //实时显示
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnBtnTimer1()
+{
+	// TODO: 在此添加命令处理程序代码 
+	if (mAnimateTimer == 0)//判断定时器有没有启动 
+	{
+		mAnimateTimer = SetTimer(1, 50, NULL);//启动定时器 50 毫秒。可根据动画帧频要求设置 
+	}
+	else
+	{
+		KillTimer(mAnimateTimer);//关闭定时器 
+		mAnimateTimer = 0;
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnUpdateBtnTimer1(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码 
+	pCmdUI->SetCheck(mAnimateTimer != 0);
+}
+
+
+void CCG2D2021113163王梓翕View::OnBtnFireworks()
+{
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG2DLineSegment* pLine = new CG2DLineSegment(Vec2d(0,0), Vec2d(0,0));
+		pLine->setPenColor(RGB(0, 0, 0));
+		pLine->setPenWidth(10000);
+		//pLine->setPenStyle(view->PenStyle());
+		addRenderable(pLine); //创建成功，添加到场景
+		pDoc->OnBtnFireworks(); //假定每次移动5个单位
 	}
 }

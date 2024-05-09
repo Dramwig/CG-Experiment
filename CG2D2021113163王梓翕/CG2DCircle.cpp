@@ -63,5 +63,4 @@ void CG2DCircle::computeBoundingBox() {
     mABox.addPoint(Vec2d(int(s.x() - r1), int(s.y() - r2)));	//Æðµã
     mABox.addPoint(Vec2d(int(s.x() + r1), int(s.y() + r2)));	//ÖÕµã
     setBoundsDirty(false);
-    setBoundsDirty(false);
 }

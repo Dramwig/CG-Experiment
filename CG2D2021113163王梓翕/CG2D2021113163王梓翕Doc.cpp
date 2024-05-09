@@ -31,6 +31,9 @@
 #include "CG2DPolygon.h"
 #include <propkey.h>
 #include "AABBox2.h"
+#include "Sparkler2D.h"
+#include "CInputDialog1.h"
+#include "Fireworks2D.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -53,6 +56,9 @@ BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕Doc, CDocument)
 	ON_UPDATE_COMMAND_UI(ID_ALGOR_SEEDFILL, &CCG2D2021113163王梓翕Doc::OnUpdateAlgorSeedfill)
 	ON_UPDATE_COMMAND_UI(ID_BOUND_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdateBoundColor)
 	ON_UPDATE_COMMAND_UI(ID_INNER_COLOR, &CCG2D2021113163王梓翕Doc::OnUpdateInnerColor)
+	ON_COMMAND(ID_BTN_PARTICLE, &CCG2D2021113163王梓翕Doc::OnBtnParticle)
+	//ON_COMMAND(ID_BTN_FIREWORKS, &CCG2D2021113163王梓翕Doc::OnBtnFireworks)
+	ON_COMMAND(ID_BTN_REMOVEALL, &CCG2D2021113163王梓翕Doc::OnBtnRemoveall)
 END_MESSAGE_MAP()
 
 BOOL CCG2D2021113163王梓翕Doc::OnNewDocument()
@@ -159,6 +165,9 @@ CCG2D2021113163王梓翕Doc::CCG2D2021113163王梓翕Doc() noexcept
 	// TODO: 在此添加一次性构造代码
 	mScene = new CG2DScene();
 	mCameras.Add(new CG2DCamera());
+
+	////粒子系统 
+	//mScene->addParticleSystem(new Sparkler2D(mScene));
 
 	//// 测试添加直线段到场景（要包含"CG2DLineSegment.h"），测试完毕后删除。
 	//mScene->addRenderable(new CG2DLineSegment(Vec2d(100, 100), Vec2d(500, 200)));
@@ -680,4 +689,51 @@ void CCG2D2021113163王梓翕Doc::CameraAspectRatio()
 			pCamera->SetWindowTop(pCamera->Top() * r);
 		}
 	}
+}
+
+//动画定时回调（如果场景有更新需要重绘则返回true） 
+bool CCG2D2021113163王梓翕Doc::TimerCallback()
+{
+	return mScene->TimerCallback();
+}
+
+void CCG2D2021113163王梓翕Doc::OnBtnParticle()
+{
+	// TODO: 在此添加命令处理程序代码 
+	CInputDialog1 dlg;
+	dlg.mTitle = _T("粒子生成数量"); //根据需要设置对话框标题 
+	if (dlg.DoModal() == IDOK) //对话框中点击了【确定】按钮，取回输入的数据 
+	{
+		//根据实际需要使用输入的数据 
+		//假如输入的是数值，则将字符串转换为数值 
+		double len = _ttof(dlg.mValue1);
+		//
+		Sparkler2D* s = new Sparkler2D(mScene);
+		s->setParticlesGen(int(len));
+		mScene->addParticleSystem(s);
+	}
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnBtnFireworks()
+{
+	CInputDialog1 dlg;
+	dlg.mTitle = _T("粒子生成数量(最好是1)"); //根据需要设置对话框标题 
+	if (dlg.DoModal() == IDOK) //对话框中点击了【确定】按钮，取回输入的数据 
+	{
+		//根据实际需要使用输入的数据 
+		//假如输入的是数值，则将字符串转换为数值 
+		double len = _ttof(dlg.mValue1);
+		//
+		Fireworks2D* s = new Fireworks2D(mScene);
+		s->setParticlesGen(int(len));
+		mScene->addParticleSystem(s);
+	}
+}
+
+
+void CCG2D2021113163王梓翕Doc::OnBtnRemoveall()
+{
+	// TODO: 在此添加命令处理程序代码
+	mScene->removeAllParticleSystem();
 }

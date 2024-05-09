@@ -198,6 +198,13 @@ public:
 	afx_msg void OnWindowOverall();
 	afx_msg void OnAspectRatio();
 	afx_msg void OnRemoveAll();
+protected:
+	UINT_PTR mAnimateTimer = 0;
+	//动画定时器 
+public:
+	afx_msg void OnBtnTimer1();
+	afx_msg void OnUpdateBtnTimer1(CCmdUI* pCmdUI);
+	afx_msg void OnBtnFireworks();
 };
 
 #ifndef _DEBUG  // CG2D2021113163王梓翕View.cpp 中的调试版本

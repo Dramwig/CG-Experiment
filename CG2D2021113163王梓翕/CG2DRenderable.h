@@ -83,5 +83,13 @@ protected:
 public: //实验参考5
 	//获取在视口内的包围盒(仅用于绘制对象的包围盒），需要在派生类中重写
 	virtual ABox2i BoundingABoxi(CG2DCamera* pCamera);
+public: //实验参考6
+	//定时器回调，需要在派生类中重写实现多态 
+	virtual bool TimerCallback() { return false; }
+	bool TimerCallbackEnabled() const { return mTimerCallbackEnabled; }
+	void EnableTimerCallback(bool e = true) { mTimerCallbackEnabled = e; }
+protected:
+	//默认情况下，时间回调不起作用，需要在动态对象中启用 
+	bool mTimerCallbackEnabled = false;
 };
 #endif //_CG2DRenderable_H_INCLUDED

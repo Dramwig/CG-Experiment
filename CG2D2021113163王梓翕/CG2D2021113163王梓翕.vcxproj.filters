@@ -135,6 +135,18 @@
     <ClInclude Include="CG2DWindowBoxCommand.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleSystem2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sparkler2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputDialog1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireworks2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CG2D2021113163王梓翕.cpp">
@@ -243,6 +255,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CG2DWindowBoxCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Sparkler2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputDialog1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Fireworks2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

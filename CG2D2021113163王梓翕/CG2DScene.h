@@ -3,6 +3,7 @@
 #include "CGObject.h"
 #include "AABBox2.h"
 #include "Matrix33.h"
+#include "ParticleSystem2D.h"
 //使用到如下类的指针，进行类预声明
 class CG2DRenderable;
 class CG2DCamera;
@@ -60,5 +61,14 @@ public:
 	bool ShearYAxis(double shy); //沿Y轴错切
 	bool ShearXYAxis(double shx, double shy); //沿X、Y轴错切
 	bool Transform(const Mat3d& mat); //几何变换（左乘给定矩阵）
+public: //实验参考6
+	//定时回调（用于实现动画） 
+	bool TimerCallback();
+public:
+	bool addParticleSystem(ParticleSystem2D*);
+	bool delParticleSystem(ParticleSystem2D*);
+	void removeAllParticleSystem();
+protected:
+	CTypedPtrArray<CObArray, ParticleSystem2D*> mParticleSystems;
 };
 #endif //_CG2DScene_H_INCLUDED

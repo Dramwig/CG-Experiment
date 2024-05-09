@@ -3,6 +3,7 @@
 #include "CG2DRenderable.h"
 #include "CG2DCamera.h"
 #include "CG2DRenderContext.h"
+
 IMPLEMENT_SERIAL(CG2DScene, CGObject, 1)
 CG2DScene::CG2DScene()
 	:CGObject(CString("CG2DScene"))
@@ -11,6 +12,8 @@ CG2DScene::CG2DScene()
 CG2DScene::~CG2DScene()
 {
 	removeAllRenderable();
+	//+删除粒子系统 
+	removeAllParticleSystem();
 }
 //序列化
 void CG2DScene::Serialize(CArchive& ar)
@@ -537,4 +540,91 @@ bool CG2DScene::Transform(const Mat3d& mat) //几何变换（左乘给定矩阵）
 		i++;
 	}
 	return true;
+}
+//定时回调（用于实现动画） 
+bool CG2DScene::TimerCallback()
+{
+	//粒子系统产生新粒子 
+	size_t i = 0, cnt = mParticleSystems.GetSize();
+	while (i < cnt)
+	{
+		ParticleSystem2D* p = mParticleSystems.GetAt(i);
+		if (p)
+		{
+			p->Run();
+		}
+		i++;
+	}
+	//粒子更新 
+	i = 0, cnt = mRenderables.GetSize();
+	if (cnt == 0)
+		return false;
+	bool changed = false;
+	while (i < cnt) //调用场景中每个图形对象的回调进行状态更新 
+	{
+		CG2DRenderable* s = mRenderables.GetAt(i);
+		if (s && s->TimerCallbackEnabled())
+		{
+			if (s->TimerCallback())
+				changed = true;
+		}
+		i++;
+	}
+	//删除生命结束的粒子 
+	i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* s = mRenderables.GetAt(i);
+		if (s)
+		{
+			Particle2D* p = dynamic_cast<Particle2D*>(s);
+			if (p && p->isDead())
+			{
+				delRenderable(s);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		cnt = mRenderables.GetSize();
+	}
+	return changed;
+}
+
+
+bool CG2DScene::addParticleSystem(ParticleSystem2D* p)
+{
+	if (p == nullptr || !p->IsKindOf(RUNTIME_CLASS(ParticleSystem2D)))
+		return false;
+	mParticleSystems.Add(p);
+	p->Scene() = this;
+	return true;
+}
+bool CG2DScene::delParticleSystem(ParticleSystem2D* p)
+{
+	if (p == nullptr)
+		return false;
+	size_t i = 0, cnt = mParticleSystems.GetSize();
+	while (i < cnt)
+	{
+		if (mParticleSystems.GetAt(i) == p) {
+			delete mParticleSystems.GetAt(i);
+			mParticleSystems.RemoveAt(i);
+			return true;
+		}
+		i++;
+	}
+	return false;
+}
+void CG2DScene::removeAllParticleSystem()
+{
+	size_t i = 0, cnt = mParticleSystems.GetSize();
+	while (i < cnt)
+	{
+		if (mParticleSystems.GetAt(i))
+			delete mParticleSystems.GetAt(i);
+		i++;
+	}
+	mParticleSystems.RemoveAll();
 }
