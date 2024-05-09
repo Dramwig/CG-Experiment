@@ -25,7 +25,9 @@
 #define IDR_RIBBON                      307
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_BUTTON2                      32771
+#define ID_DRAW_CDC                     32771
 #define ID_BUTTON3                      32772
+#define ID_CAMERA_FAR                   32772
 #define ID_ALGORITHM_LINE               32773
 #define ID_ALGORITHM_CIRCLE             32774
 #define ID_ALGORITHM_FILL               32776
@@ -52,7 +54,9 @@
 #define ID_TRANSLATE_DOWN               32814
 #define ID_PICK_ONE                     32818
 #define ID_BUTTON4                      32819
+#define ID_CAMERA_LEFT                  32819
 #define ID_BUTTON6                      32820
+#define ROTATION_RESET                  32820
 #define ID_TRANSLATE_ZOOM_OUT           32822
 #define ID_TRANSLATE_SYM_X              32823
 #define ID_TRANSLATE_SYM_O              32824
@@ -65,13 +69,59 @@
 #define ID_TRANSLATE_ZOOM_IN            32833
 #define ID_TRANSLATE_MOVE               32834
 #define ID_TRANSLATE_ROTATE             32835
+#define ID_CAMERA_RIGHT                 32837
+#define ID_CAMERA_UP                    32838
+#define ID_CAMERA_DOWN                  32839
+#define ROTATION_CLOCKWISE              32841
+#define ROTATION_COUNTER                32842
+#define ID_VIEWPOINT_LEFT_DECREASE      32843
+#define ID_VIEWPOINT_RIGHT_ADD          32844
+#define ID_VIEWPOINT_BOTTOM_DECREASE    32845
+#define ID_VIEWPOINT_BOTTOM_ADD         32846
+#define ID_VIEWPOINT_TOP_ADD            32847
+#define ID_WINDOW_REDUCE                32849
+#define ID_WINDOW_EXPAND                32851
+#define ID_WINDOW_BOX                   32852
+#define ID_VIEWPOINT_OVERALL            32853
+#define ID_WINDOW_OVERALL               32853
+#define ID_BUTTON16                     32854
+#define ID_VIEWPOINT_TOP_DECREASE       32864
+#define ID_CAMERA_MOVE                  32865
+#define ID_VIEWPOINT_LEFT_ADD           32866
+#define ID_VIEWPOINT_RIGHT_DECREASE     32867
+#define ID_CAMERA_CLOSE                 32868
+#define ID_BUTTON8                      32871
+#define ID_BUTTON9                      32872
+#define ID_BUTTON10                     32873
+#define ID_BUTTON11                     32874
+#define ID_BUTTON12                     32875
+#define ID_DRAW_POINT                   32878
+#define ID_Window_LEFT_ADD              32879
+#define ID_WINDOW_TOP_DECREASE          32880
+#define ID_WINDOW_TOP_ADD               32881
+#define ID_WINDOW_RIGHT_DECREASE        32882
+#define ID_WINDOW_BOTTOM_ADD            32883
+#define ID_WINDOW_RIGHT_ADD             32884
+#define ID_WINDOW_LEFT_DECREASE         32885
+#define ID_WINDOW_BOTTOM_DECREASE       32886
+#define ID_BUTTON5                      32887
+#define ID_BUTTON7                      32888
+#define ID_BUTTON13                     32889
+#define ID_BUTTON15                     32890
+#define ID_BUTTON17                     32891
+#define ID_BUTTON18                     32892
+#define ID_BUTTON19                     32893
+#define ID_BUTTON20                     32894
+#define ID_VIEWPOINT_RESET              32895
+#define ID_WINDOW_RESET                 32896
+#define ID_TRANSLATE_ROTATE_O           32897
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32836
+#define _APS_NEXT_COMMAND_VALUE         32898
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

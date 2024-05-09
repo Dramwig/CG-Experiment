@@ -210,6 +210,10 @@ public:
 		Vector2<T> c = (minCorner() + maxCorner()) / 2.0f;
 		return c;
 	}
+	T left() const { return mMin.x(); }
+	T right() const { return mMax.x(); }
+	T top() const { return mMax.y(); }
+	T bottom() const { return mMin.y(); }
 protected:
 	Vector2<T> mMin;
 	Vector2<T> mMax;

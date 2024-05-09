@@ -36,6 +36,8 @@
 #include "CG2DRenderablePickInBoxCommand.h"
 #include "CG2DRenderableMoveCommand.h"
 #include "CG2DRenderableRotateCommand.h"
+#include "CG2DCameraMoveCommand.h"
+#include "CG2DWindowBoxCommand.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,8 +53,8 @@ IMPLEMENT_DYNCREATE(CCG2D2021113163王梓翕View, CView)
 BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕View, CView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
-	ON_COMMAND(ID_BUTTON2, &CCG2D2021113163王梓翕View::OnDrawCDC)
-	ON_COMMAND(ID_BUTTON3, &CCG2D2021113163王梓翕View::OnDrawPoint)
+	ON_COMMAND(ID_DRAW_CDC, &CCG2D2021113163王梓翕View::OnDrawCDC)
+	ON_COMMAND(ID_DRAW_POINT, &CCG2D2021113163王梓翕View::OnDrawPoint)
 	ON_COMMAND(ID_ALGORITHM_LINE, &CCG2D2021113163王梓翕View::OnAlgorithmLine)
 	ON_COMMAND(ID_ALGORITHM_CIRCLE, &CCG2D2021113163王梓翕View::OnAlgorithmCircle)
 	ON_COMMAND(ID_ALGORITHM_FILL, &CCG2D2021113163王梓翕View::OnAlgorithmFill)
@@ -102,6 +104,40 @@ BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕View, CView)
 	ON_UPDATE_COMMAND_UI(ID_TRANSLATE_MOVE, &CCG2D2021113163王梓翕View::OnUpdateTranslateMove)
 	ON_COMMAND(ID_TRANSLATE_ROTATE, &CCG2D2021113163王梓翕View::OnTranslateRotate)
 	ON_UPDATE_COMMAND_UI(ID_TRANSLATE_ROTATE, &CCG2D2021113163王梓翕View::OnUpdateTranslateRotate)
+	ON_COMMAND(ID_CAMERA_LEFT, &CCG2D2021113163王梓翕View::OnCameraLeft)
+	ON_COMMAND(ID_CAMERA_RIGHT, &CCG2D2021113163王梓翕View::OnCameraRight)
+	ON_COMMAND(ID_CAMERA_UP, &CCG2D2021113163王梓翕View::OnCameraUp)
+	ON_COMMAND(ID_CAMERA_DOWN, &CCG2D2021113163王梓翕View::OnCameraDown)
+	ON_COMMAND(ID_CAMERA_FAR, &CCG2D2021113163王梓翕View::OnCameraFar)
+	ON_COMMAND(ID_CAMERA_CLOSE, &CCG2D2021113163王梓翕View::OnCameraClose)
+	ON_COMMAND(ROTATION_COUNTER, &CCG2D2021113163王梓翕View::OnCounter)
+	ON_COMMAND(ROTATION_CLOCKWISE, &CCG2D2021113163王梓翕View::OnClockwise)
+	ON_COMMAND(ROTATION_RESET, &CCG2D2021113163王梓翕View::OnReset)
+	ON_COMMAND(ID_Window_LEFT_ADD, &CCG2D2021113163王梓翕View::OnWindowLeftAdd)
+	ON_COMMAND(ID_WINDOW_LEFT_DECREASE, &CCG2D2021113163王梓翕View::OnWindowLeftDecrease)
+	ON_COMMAND(ID_WINDOW_RIGHT_ADD, &CCG2D2021113163王梓翕View::OnWindowRightAdd)
+	ON_COMMAND(ID_WINDOW_RIGHT_DECREASE, &CCG2D2021113163王梓翕View::OnWindowRightDecrease)
+	ON_COMMAND(ID_WINDOW_BOTTOM_ADD, &CCG2D2021113163王梓翕View::OnWindowBottomAdd)
+	ON_COMMAND(ID_WINDOW_BOTTOM_DECREASE, &CCG2D2021113163王梓翕View::OnWindowBottomDecrease)
+	ON_COMMAND(ID_WINDOW_TOP_ADD, &CCG2D2021113163王梓翕View::OnWindowTopAdd)
+	ON_COMMAND(ID_WINDOW_TOP_DECREASE, &CCG2D2021113163王梓翕View::OnWindowTopDecrease)
+	ON_COMMAND(ID_WINDOW_REDUCE, &CCG2D2021113163王梓翕View::OnWindowReduce)
+	ON_COMMAND(ID_WINDOW_EXPAND, &CCG2D2021113163王梓翕View::OnWindowExpand)
+	ON_COMMAND(ID_VIEWPOINT_LEFT_ADD, &CCG2D2021113163王梓翕View::OnViewpointLeftAdd)
+	ON_COMMAND(ID_VIEWPOINT_LEFT_DECREASE, &CCG2D2021113163王梓翕View::OnViewpointLeftDecrease)
+	ON_COMMAND(ID_VIEWPOINT_RIGHT_ADD, &CCG2D2021113163王梓翕View::OnViewpointRightAdd)
+	ON_COMMAND(ID_VIEWPOINT_RIGHT_DECREASE, &CCG2D2021113163王梓翕View::OnViewpointRightDecrease)
+	ON_COMMAND(ID_VIEWPOINT_BOTTOM_ADD, &CCG2D2021113163王梓翕View::OnViewpointBottomAdd)
+	ON_COMMAND(ID_VIEWPOINT_BOTTOM_DECREASE, &CCG2D2021113163王梓翕View::OnViewpointBottomDecrease)
+	ON_COMMAND(ID_VIEWPOINT_TOP_ADD, &CCG2D2021113163王梓翕View::OnViewpointTopAdd)
+	ON_COMMAND(ID_VIEWPOINT_TOP_DECREASE, &CCG2D2021113163王梓翕View::OnViewpointTopDecrease)
+	ON_COMMAND(ID_VIEWPOINT_RESET, &CCG2D2021113163王梓翕View::OnViewpointReset)
+	ON_COMMAND(ID_WINDOW_RESET, &CCG2D2021113163王梓翕View::OnWindowReset)
+	ON_COMMAND(ID_CAMERA_MOVE, &CCG2D2021113163王梓翕View::OnCameraMove)
+	ON_UPDATE_COMMAND_UI(ID_CAMERA_MOVE, &CCG2D2021113163王梓翕View::OnUpdateCameraMove)
+	ON_COMMAND(ID_WINDOW_BOX, &CCG2D2021113163王梓翕View::OnWindowBox)
+	ON_UPDATE_COMMAND_UI(ID_WINDOW_BOX, &CCG2D2021113163王梓翕View::OnUpdateWindowBox)
+	ON_COMMAND(ID_WINDOW_OVERALL, &CCG2D2021113163王梓翕View::OnWindowOverall)
 END_MESSAGE_MAP()
 
 // CCG2D2021113163王梓翕View 构造/析构
@@ -354,7 +390,7 @@ void CCG2D2021113163王梓翕View::OnDraw(CDC* pDC)
 		return;
 
 	pDoc->RenderScene(this);
-	
+	//Prompt(_T("OnDraw"));
 }
 
 void CCG2D2021113163王梓翕View::OnRButtonUp(UINT /* nFlags */, CPoint point)
@@ -1420,6 +1456,424 @@ void CCG2D2021113163王梓翕View::OnTranslateMisknipXy()
 }
 
 
+void CCG2D2021113163王梓翕View::OnCameraDown()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->MoveCamera(0, -5); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnCameraUp()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->MoveCamera(0, 5); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnCameraRight()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->MoveCamera(5, 0); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnCameraLeft()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->MoveCamera(-5, 0); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+//逆时针旋转
+void CCG2D2021113163王梓翕View::OnCounter()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->RotateCamera(3); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();u/asdas
+	}
+}
+
+//顺时针旋转
+void CCG2D2021113163王梓翕View::OnClockwise()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->RotateCamera(-3); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+//重置相机
+void CCG2D2021113163王梓翕View::OnReset()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->ResetCamera(); //假定每次移动5个单位
+		Invalidate(true);
+		//UpdateWindow();
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnCameraFar()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->ZoomCamera(1.1);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnCameraClose()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->ZoomCamera(10.0 / 11);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowLeftAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(5, 0, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowLeftDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(-5, 0, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowRightAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, 0, 5, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowRightDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, 0, -5, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowBottomAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, 5, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowTopAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, 0, 0, 5);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowTopDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, 0, 0, -5);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowReduce()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(10, 10, -10, -10);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowExpand()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(-10, -10, 10, 10);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowBottomDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOffset(0, -5, 0, 0);
+		Invalidate(true);
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnViewpointLeftAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(10, 0, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointLeftDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(-10, 0, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointRightAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, 0, 10, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointRightDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, 0, -10, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointBottomAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, 10, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointBottomDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, -10, 0, 0);
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnViewpointTopAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, 0, 0, 10);
+		Invalidate(true);
+	}
+}
 
 
 
+void CCG2D2021113163王梓翕View::OnViewpointTopDecrease()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportOffset(0, 0, 0, -10);
+		Invalidate(true);
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnViewpointReset()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraViewportReset();
+		Invalidate(true);
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowReset()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->WindowReset();
+		Invalidate(true);
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnCameraMove()
+{
+	// TODO: 在此添加命令处理程序代码
+	if (mCommand)
+	{
+		mCommand->Cancel();
+		delete mCommand;
+		mCommand = nullptr;
+	}
+	mCommand = new CG2DCameraMoveCommand(this); //创建绘制直线段的命令对象
+}
+
+
+void CCG2D2021113163王梓翕View::OnUpdateCameraMove(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetCheck(mCommand && mCommand->GetType() == static_cast<int>(CommandType::cmd2dCameraMove));
+}
+
+
+void CCG2D2021113163王梓翕View::OnWindowBox()
+{
+	// TODO: 在此添加命令处理程序代码
+	if (mCommand)
+	{
+		mCommand->Cancel();
+		delete mCommand;
+		mCommand = nullptr;
+	}
+	mCommand = new CG2DWindowBoxCommand(this); //创建绘制直线段的命令对象
+}
+
+
+void CCG2D2021113163王梓翕View::OnUpdateWindowBox(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetCheck(mCommand && mCommand->GetType() == static_cast<int>(CommandType::cmd2dWindowBox));
+}
+
+void CCG2D2021113163王梓翕View::CameraMoveOffset(double dx, double dy) 
+{
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->MoveCamera(dx, dy); //假定每次移动5个单位
+		Invalidate(true); //实时显示
+	}
+}
+
+void CCG2D2021113163王梓翕View::CameraWindowSet(double left, double bottom, double right, double top)
+{
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowSet(left, bottom, right, top); //假定每次移动5个单位
+		Invalidate(true); //实时显示
+	}
+}
+
+void CCG2D2021113163王梓翕View::OnWindowOverall()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraWindowOverall(); //假定每次移动5个单位
+		Invalidate(true); //实时显示
+	}
+}

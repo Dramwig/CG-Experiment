@@ -34,7 +34,7 @@ int CG2DRenderablePickInBoxCommand::OnLButtonDown(UINT nFlags, CPoint pos)
 	return 0;
 }
 
-void DrawRect(CView* mView, CPoint start, CPoint end)
+void CG2DRenderablePickInBoxCommand::DrawRect(CView* mView, CPoint start, CPoint end)
 {
 	CClientDC dc(mView);
 	CPen pen(PS_DOT, 1, RGB(0, 0, 0));

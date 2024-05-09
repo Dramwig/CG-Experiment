@@ -105,7 +105,8 @@ bool CG2DScene::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera)
 		i++;
 	}
 	//绘制世界坐标系示意（给定范围）
-	Vec2d wxs(-200, 0), wxe(200, 0), wys(0, -200), wye(0, 200); //X轴、Y轴
+	//世界坐标系的两轴定义（在世界坐标系中的四个点）
+	Vec2d wxs(-400, 0), wxe(400, 0), wys(0, -400), wye(0, 400); //X轴、Y轴
 	//转换到视口
 	Vec2i vxs = pCamera->WorldtoViewPort(wxs);
 	Vec2i vxe = pCamera->WorldtoViewPort(wxe);
@@ -113,16 +114,42 @@ bool CG2DScene::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera)
 	Vec2i vye = pCamera->WorldtoViewPort(wye);
 	//绘制x轴
 	HDC hDC = pRC->GetMemHDC();
-	CPen penr(PS_SOLID, 1, RGB(255, 0, 0));
-	HPEN hOldPen = (HPEN)::SelectObject(hDC, penr.GetSafeHandle());
+	CPen penwx(PS_SOLID, 1, RGB(255, 0, 0));
+	HPEN hOldPen = (HPEN)::SelectObject(hDC, penwx.GetSafeHandle());
 	::MoveToEx(hDC, vxs.x(), vxs.y(), nullptr);
 	::LineTo(hDC, vxe.x(), vxe.y());
 	::SelectObject(hDC, hOldPen);
 	//绘制y轴
-	CPen penb(PS_SOLID, 1, RGB(0, 0, 255));
-	hOldPen = (HPEN)::SelectObject(hDC, penb.GetSafeHandle());
+	CPen penwy(PS_DASH, 1, RGB(255, 0, 0));
+	hOldPen = (HPEN)::SelectObject(hDC, penwy.GetSafeHandle());
 	::MoveToEx(hDC, vys.x(), vys.y(), nullptr);
 	::LineTo(hDC, vye.x(), vye.y());
+	::SelectObject(hDC, hOldPen);
+	//绘制观察坐标系
+	//观察坐标系的原始定义
+	Vec2d xsw(-300, 0), xew(300, 0), ysw(0, -300), yew(0, 300); //X轴、Y轴
+	Vec3d wl(xsw), wr(xew), wb(ysw), wt(yew);
+	//根据观察坐标系的定义，得到观察坐标系坐标轴在世界坐标系中的位置（在世界坐标系中的四个点）
+	Vec2d wlw = pCamera->VCStoWCS(Vec2d(wl.x(), wl.y()));
+	Vec2d wrw = pCamera->VCStoWCS(Vec2d(wr.x(), wr.y()));
+	Vec2d wbw = pCamera->VCStoWCS(Vec2d(wb.x(), wb.y()));
+	Vec2d wtw = pCamera->VCStoWCS(Vec2d(wt.x(), wt.y()));
+	//观察坐标系坐标轴转换到视口
+	Vec2i vls = pCamera->WorldtoViewPort(wlw);
+	Vec2i vre = pCamera->WorldtoViewPort(wrw);
+	Vec2i vbs = pCamera->WorldtoViewPort(wbw);
+	Vec2i vte = pCamera->WorldtoViewPort(wtw);
+	//绘制x轴
+	CPen penvx(PS_SOLID, 1, RGB(0, 0, 255));
+	hOldPen = (HPEN)::SelectObject(hDC, penvx.GetSafeHandle());
+	::MoveToEx(hDC, vls.x(), vls.y(), nullptr);
+	::LineTo(hDC, vre.x(), vre.y());
+	::SelectObject(hDC, hOldPen);
+	//绘制y轴
+	CPen penvy(PS_DASH, 1, RGB(0, 0, 255));
+	hOldPen = (HPEN)::SelectObject(hDC, penvy.GetSafeHandle());
+	::MoveToEx(hDC, vbs.x(), vbs.y(), nullptr);
+	::LineTo(hDC, vte.x(), vte.y());
 	::SelectObject(hDC, hOldPen);
 	return true;
 }

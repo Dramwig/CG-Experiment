@@ -35,6 +35,8 @@ enum class CommandType //操作命令类型，参考如下定义，可根据需要修改
 	cmd2dPickInBoxRenderable = 117,
 	cmd2dRectClip = 121,
 	cmd2dPolyClip = 122,
+	cmd2dCameraMove = 130,
+	cmd2dWindowBox = 131,
 	cmdUnknown = 1000
 };
 //与绘图客户区的交互，使用命令模式，简化CView派生类中键盘、鼠标事件的处理

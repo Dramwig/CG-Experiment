@@ -30,6 +30,7 @@
 #include "CG2DEllipse.h"
 #include "CG2DPolygon.h"
 #include <propkey.h>
+#include "AABBox2.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -158,6 +159,10 @@ CCG2D2021113163王梓翕Doc::CCG2D2021113163王梓翕Doc() noexcept
 	// TODO: 在此添加一次性构造代码
 	mScene = new CG2DScene();
 	mCameras.Add(new CG2DCamera());
+	cameraViewportOffleft = 0;
+	cameraViewportOffbottom = 0;
+	cameraViewportOffright = 0;
+	cameraViewportOfftop = 0;
 
 	//// 测试添加直线段到场景（要包含"CG2DLineSegment.h"），测试完毕后删除。
 	//mScene->addRenderable(new CG2DLineSegment(Vec2d(100, 100), Vec2d(500, 200)));
@@ -231,7 +236,11 @@ bool CCG2D2021113163王梓翕Doc::RenderScene(CG2DRenderContext* pRC)
 		return false;
 	pCamera->SetClientWidth(w);
 	pCamera->SetClientHeight(h);
-	pCamera->viewport().set(0, 0, w, h);
+	pCamera->viewport().set(cameraViewportOffleft, 
+		cameraViewportOffbottom, 
+		w + cameraViewportOffright - cameraViewportOffleft,
+		h + cameraViewportOfftop - cameraViewportOffbottom
+	);
 	pRC->Ready(pCamera);
 	bool ret = mScene->Render(pRC, pCamera);
 	pRC->Finish(pCamera);
@@ -506,4 +515,150 @@ bool CCG2D2021113163王梓翕Doc::Transform(const Mat3d & mat) //几何变换（
 		return true;
 	}
 	return false;
+}
+//默认相机的观察坐标系
+void CCG2D2021113163王梓翕Doc::MoveCamera(double tx, double ty) //平移相机（观察坐标系）
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->Move(tx, ty);
+	}
+}
+void CCG2D2021113163王梓翕Doc::RotateCamera(double degree) //转动相机（观察坐标系）
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->Rotate(degree);
+	}
+}
+void CCG2D2021113163王梓翕Doc::ResetCamera() //重置相机到默认参数（观察坐标系）
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->Reset();
+	}
+}
+//默认相机的观察窗口
+void CCG2D2021113163王梓翕Doc::ZoomCamera(const Vec2d& lb, const Vec2d& rt) //观察窗口左下角、右上角
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->Zoom(lb, rt);
+	}
+}
+void CCG2D2021113163王梓翕Doc::ZoomCamera(double ratio) //给定观察窗口的缩放比例（）
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->Zoom(ratio);
+	}
+}
+void CCG2D2021113163王梓翕Doc::CameraShowAll() //显示全部场景
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		if (mScene)
+		{
+			ABox2d box = mScene->BoundingABox();
+			if (box.isNull())
+			{
+			}
+			else
+			{
+				pCamera->Zoom(box.minCorner(), box.maxCorner());
+			}
+		}
+	}
+}
+void CCG2D2021113163王梓翕Doc::CameraWindowOffset(double offleft, double offbottom, double offright, double offtop) //边界移动
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->SetWindowLeft(pCamera->Left() + offleft);
+		pCamera->SetWindowBottom(pCamera->Bottom() + offbottom);
+		pCamera->SetWindowRight(pCamera->Right() + offright);
+		pCamera->SetWindowTop(pCamera->Top() + offtop);
+	}
+}
+
+void CCG2D2021113163王梓翕Doc::CameraWindowSet(double left, double bottom, double right, double top) //边界移动
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->SetWindowLeft(left);
+		pCamera->SetWindowBottom(bottom);
+		pCamera->SetWindowRight(right);
+		pCamera->SetWindowTop(top);
+	}
+}
+
+void CCG2D2021113163王梓翕Doc::WindowReset()
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		CameraWindowSet(-1000, -1000, 1000, 1000);
+	}
+}
+
+void CCG2D2021113163王梓翕Doc::CameraWindowOverall() 
+{
+	CG2DCamera* pCamera = defaultCamera();
+	ABox2d box = mScene->BoundingABox();
+	if (pCamera != nullptr)
+		if (box.isNull()) {
+			WindowReset();
+		}
+		else 
+		{
+			Vec2d lb = defaultCamera()->WCStoVCS(Vec2d(box.left(), box.bottom()));
+			Vec2d lt = defaultCamera()->WCStoVCS(Vec2d(box.left(), box.top()));
+			Vec2d rt = defaultCamera()->WCStoVCS(Vec2d(box.right(), box.top()));
+			Vec2d rb = defaultCamera()->WCStoVCS(Vec2d(box.right(), box.bottom()));
+			double left = std::min({ lb.x(), lt.x(), rt.x(), rb.x() });
+			double bottom = std::min({ lb.y(), lt.y(), rt.y(), rb.y() });
+			double right = std::max({ lb.x(), lt.x(), rt.x(), rb.x() });
+			double top = std::max({ lb.y(), lt.y(), rt.y(), rb.y() });
+			CameraWindowSet(left, bottom, right, top);
+		}
+}
+
+//默认相机的视口（选作，自行补充）
+void CCG2D2021113163王梓翕Doc::CameraViewportOffset(int offleft, int offbottom, int offright, int offtop) //边界移动
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		//pCamera->ViewportOffset(offleft, offbottom, offright, offtop);
+	}
+	cameraViewportOffleft+=offleft;
+	cameraViewportOffbottom+=offbottom;
+	cameraViewportOffright+=offright;
+	cameraViewportOfftop+=offtop;
+}
+
+void CCG2D2021113163王梓翕Doc::CameraViewportReset()
+{
+	//CG2DCamera* pCamera = defaultCamera();
+	cameraViewportOffleft = 0;
+	cameraViewportOffbottom = 0;
+	cameraViewportOffright = 0;
+	cameraViewportOfftop = 0;
+}
+
+void CCG2D2021113163王梓翕Doc::CameraViewportSet(int width, int height)
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		pCamera->ViewportSet(width, height);
+	}
 }

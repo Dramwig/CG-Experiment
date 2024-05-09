@@ -195,3 +195,10 @@ void CG2DRenderable::Transform(const Mat3d & mat) //几何变换（左乘给定矩阵）
 	mMat.preMultiply(mat);
 	setBoundsDirty(true);
 }
+
+//获取在视口内的包围盒(仅用于绘制对象的包围盒），需要在派生类中重写
+ABox2i CG2DRenderable::BoundingABoxi(CG2DCamera* pCamera)
+{
+	//派生类中实现
+	return ABox2i();
+}

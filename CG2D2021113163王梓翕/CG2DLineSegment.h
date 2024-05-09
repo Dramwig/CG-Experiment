@@ -22,5 +22,7 @@ protected:
 	Vec2d mStart, mEnd; //起点、终点坐标
 public:
 	virtual bool Picked(const Vec2d& p, double radius); //（二维）是否拾取到
+	//获取在视口内的包围盒(仅用于绘制对象的包围盒）
+	virtual ABox2i BoundingABoxi(CG2DCamera* pCamera);
 };
 #endif //_CG2DLineSegment_H_INCLUDED

@@ -9,6 +9,7 @@ public:
 	static const int element_count = 3;
 	// 默认构造
 	Vector3() { elements[0] = 0; elements[1] = 0; elements[2] = 0; }
+	//Vector3(T x, T y, T z){ elements[0] = x; elements[1] = y; elements[2] = z; }
 	// 析构函数
 	~Vector3() = default;
 	// 拷贝构造

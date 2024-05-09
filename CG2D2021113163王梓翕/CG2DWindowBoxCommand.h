@@ -1,10 +1,10 @@
 #pragma once
 #include "UIEventListener.h"
-class CG2DRenderablePickInBoxCommand : public UIEventListener
+class CG2DWindowBoxCommand : public UIEventListener
 {
 public:
-	CG2DRenderablePickInBoxCommand(CView* pview = nullptr);
-	~CG2DRenderablePickInBoxCommand() = default;
+	CG2DWindowBoxCommand(CView* pview = nullptr);
+	~CG2DWindowBoxCommand() = default;
 	virtual int GetType() override; //命令类型
 	virtual void DrawRect(CView* mView, CPoint start, CPoint end);
 	//鼠标事件（鼠标左键单击用于拾取）

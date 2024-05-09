@@ -185,6 +185,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AABBox2.h" />
+    <ClInclude Include="CG2DCameraMoveCommand.h" />
     <ClInclude Include="CG2DCircleCenterRadiusCreateCommand.h" />
     <ClInclude Include="CG2D2021113163王梓翕.h" />
     <ClInclude Include="CG2D2021113163王梓翕Doc.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="CG2DRenderContext.h" />
     <ClInclude Include="CG2DScene.h" />
     <ClInclude Include="CG2DViewPort.h" />
+    <ClInclude Include="CG2DWindowBoxCommand.h" />
     <ClInclude Include="CGBase.h" />
     <ClInclude Include="CGObject.h" />
     <ClInclude Include="CSceneTreeView.h" />
@@ -225,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABBox2.cpp" />
+    <ClCompile Include="CG2DCameraMoveCommand.cpp" />
     <ClCompile Include="CG2DCircleCenterRadiusCreateCommand.cpp" />
     <ClCompile Include="CG2D2021113163王梓翕.cpp" />
     <ClCompile Include="CG2D2021113163王梓翕Doc.cpp" />
@@ -249,6 +252,7 @@
     <ClCompile Include="CG2DRenderContext.cpp" />
     <ClCompile Include="CG2DScene.cpp" />
     <ClCompile Include="CG2DViewPort.cpp" />
+    <ClCompile Include="CG2DWindowBoxCommand.cpp" />
     <ClCompile Include="CGObject.cpp" />
     <ClCompile Include="CSceneTreeView.cpp" />
     <ClCompile Include="MainFrm.cpp" />

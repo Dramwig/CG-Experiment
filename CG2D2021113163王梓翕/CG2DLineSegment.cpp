@@ -97,27 +97,44 @@ void CG2DLineSegment::computeBoundingBox() //计算包围盒
 bool CG2DLineSegment::Picked(const Vec2d& p, double radius) //是否拾取到
 {
 	//（给定位置和范围，范围r可以根据需要设为圆半径或正方形边长的一半）
+	setBoundsDirty(true);
 	ABox2d abox = BoundingABox();
 	ABox2d sbox(p, radius);
+	Vec3d s = mMat * Vec3d(mStart); //根据几何变换计算实际起点
+	Vec3d e = mMat * Vec3d(mEnd); //根据几何变换计算实际终点
+	Vec2d End(e.x(), e.y()), Start(s.x(), s.y());
 	if (abox.intersects(sbox)) //如果点在线段包围盒内，进一步判断距离
 	{
 		//点到直线段的距离（矢量法：P点到线段SE）
-		Vec2d ES = mEnd - mStart;
-		Vec2d PS = p - mStart;
-		Vec2d PE = p - mEnd;
+		Vec2d ES = End - Start;
+		Vec2d PS = p - Start;
+		Vec2d PE = p - End;
 		double c = ES.dot(PS);//ES*PS
 		if (c <= 0) //P点在ES延长线方向
-			return false; //return PS.length();
+			return false;
 		double d = ES.lengthSquared();
 		if (c >= d) //P点在SE延长线方向
-			return false; //return (PE.length());
+			return false;
 		double r = c / d;
-		double px = mStart.x() + (mEnd.x() - mStart.x()) * r;
-		double py = mStart.y() + (mEnd.y() - mStart.y()) * r;
+		double px = Start.x() + (End.x() - Start.x()) * r;
+		double py = Start.y() + (End.y() - Start.y()) * r;
 		Vec2d S = Vec2d(px, py);
 		double dis = (p - S).length();
 		if (dis <= radius)
 			return true;
 	}
 	return false;
+}
+
+//+3，获取在视口内的包围盒(仅用于绘制对象的包围盒）
+ABox2i CG2DLineSegment::BoundingABoxi(CG2DCamera* pCamera)
+{
+	Vec3d s = mMat * Vec3d(mStart); //根据几何变换计算实际起点
+	Vec3d e = mMat * Vec3d(mEnd); //根据几何变换计算实际终点
+	Vec2i v1 = pCamera->WorldtoViewPort(Vec2d(s.x(), s.y()));
+	Vec2i v2 = pCamera->WorldtoViewPort(Vec2d(e.x(), e.y()));
+	ABox2i abox;
+	abox.addPoint(v1);
+	abox.addPoint(v2);
+	return abox;
 }

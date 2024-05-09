@@ -79,5 +79,8 @@ public:
 	virtual void Transform(const Mat3d& mat); //几何变换（左乘给定矩阵）
 protected:
 	Mat3d mMat; //到父级坐标系的变换（列向量形式）
+public: //实验参考5
+	//获取在视口内的包围盒(仅用于绘制对象的包围盒），需要在派生类中重写
+	virtual ABox2i BoundingABoxi(CG2DCamera* pCamera);
 };
 #endif //_CG2DRenderable_H_INCLUDED

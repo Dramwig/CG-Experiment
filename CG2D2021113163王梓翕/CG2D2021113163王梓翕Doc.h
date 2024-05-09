@@ -114,4 +114,23 @@ public:
 	bool ShearYAxis(double shy); //沿Y轴错切
 	bool ShearXYAxis(double shx, double shy); //沿X、Y轴错切
 	bool Transform(const Mat3d& mat); //几何变换（左乘给定矩阵）
+public:
+	//默认相机的观察坐标系
+	void MoveCamera(double tx, double ty); //平移相机（观察坐标系）
+	void RotateCamera(double degree); //转动相机（观察坐标系）
+	void ResetCamera(); //重置相机到默认参数（观察坐标系）
+	//默认相机的观察窗口
+	void ZoomCamera(const Vec2d& lb, const Vec2d& rt); //观察窗口左下角、右上角
+	void ZoomCamera(double ratio); //给定观察窗口的缩放比例（）
+	void CameraShowAll(); //显示全部场景
+	void CameraWindowOffset(double offleft, double offbottom, double offright, double offtop); //边界移动
+	void CameraWindowSet(double left, double bottom, double right, double top); //设置观察窗口
+	void WindowReset(); //重置到默认观察窗口
+	void CameraWindowOverall(); //整体观察窗口
+	//默认相机的视口
+	void CameraViewportOffset(int offleft, int offbottom, int offright, int offtop); //边界移动
+	void CameraViewportSet(int width, int height);
+	void CameraViewportReset();
+protected:
+	int cameraViewportOffleft, cameraViewportOffbottom, cameraViewportOffright, cameraViewportOfftop;
 };
