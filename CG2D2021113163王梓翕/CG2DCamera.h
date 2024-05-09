@@ -24,6 +24,7 @@ public:
 	virtual Vec2i WorldtoViewPort(const Vec2d& p);
 	//视口转换到世界坐标系（二维）(视口中的点位置对应到世界坐标系中的位置）
 	virtual Vec2d ViewPorttoWorld(const Vec2i& p);
+	virtual Vec2d ViewPorttoWorld(const Vec2d& p);
 	//观察窗口宽度与视口宽度的比例
 	double WidthFactorWindowtoViewPort();
 	//观察窗口高度与视口高度的比例
@@ -33,6 +34,8 @@ public:
 	double Bottom() const { return mBottom; }
 	double Right() const { return mRight; }
 	double Top() const { return mTop; }
+	void SetAspectRatio(double aspect); //设置观察窗口的宽高比
+	int cameraViewportOffleft, cameraViewportOffbottom, cameraViewportOffright, cameraViewportOfftop;//视口边界偏移
 protected:
 	CG2DViewPort mViewPort; //对应视口，在设备坐标系（客户区）中定义，默认与客户区相同大小。
 	//视图客户区矩形
@@ -51,11 +54,12 @@ public:
 	void SetWindowTop(double top);
 	void Zoom(double ratio); //观察窗口缩放（二维），两个方向同比例缩放，参数应大于0。
 	void Zoom(const Vec2d& lb, const Vec2d& rt);//观察窗口缩放（二维）（指定窗口参数，但要保证两方向同比例缩放）
-		//观察坐标系设置
+	//观察坐标系设置
 	void Move(double tx, double ty); //移动观察坐标系（二维）
 	void Rotate(double degree); //旋转观察坐标系（绕坐标系原点，逆时针方向为正，单位：度）（二维）
 	void Reset(); //重置到观察坐标系默认参数（二维）
 	//视口设置：通过viewport()得到视口
+	void ViewportOffset(); 
 	void ViewportOffset(int offleft, int offbottom, int offright, int offtop); //边界移动
 	void ViewportSet(int width, int height);
 	//虚拟设备坐标系中视口参数（视口mViewPort定义是相对客户区，要转换到相对于虚拟设备坐标系）
@@ -73,6 +77,7 @@ public:
 	Vec2i NCStoDCS(const Vec2d& p);
 	//设备坐标系到规范化设备坐标系（二维）（实验中使用虚拟设备坐标系代替规范化设备坐标系）
 	Vec2d DCStoNCS(const Vec2i& p);
+	Vec2d DCStoNCS(const Vec2d& p);
 	//规范化设备坐标系到观察坐标系（二维）（实验中使用虚拟设备坐标系代替规范化设备坐标系）
 	Vec2d NCStoVCS(const Vec2d& p);
 	//观察坐标系到世界坐标系（二维）

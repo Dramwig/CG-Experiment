@@ -5,11 +5,19 @@ CG2DCamera::CG2DCamera()
 	:CGObject(CString("CG2DCamera"))
 	, mViewPort(0, 0, 1, 1) //需要根据具体设置进行修改
 {
+	cameraViewportOffleft = 0;
+	cameraViewportOffbottom = 0;
+	cameraViewportOffright = -0;
+	cameraViewportOfftop = -0;
 }
 CG2DCamera::CG2DCamera(const CString& name)
 	: CGObject(CString(name))
 	, mViewPort(0, 0, 1, 1) //需要根据具体设置进行修改
 {
+	cameraViewportOffleft = 0;
+	cameraViewportOffbottom = 0;
+	cameraViewportOffright = -0;
+	cameraViewportOfftop = -0;
 }
 void CG2DCamera::Serialize(CArchive& ar)
 {
@@ -56,6 +64,12 @@ Vec2d CG2DCamera::ViewPorttoWorld(const Vec2i& p)
 	v = NCStoVCS(v); //从虚拟设备坐标系转到观察坐标系
 	return VCStoWCS(v); //从观察坐标系转到世界坐标系
 }
+Vec2d CG2DCamera::ViewPorttoWorld(const Vec2d& p)
+{
+	Vec2d v = DCStoNCS(p);//从设备坐标系转到虚拟设备坐标系
+	v = NCStoVCS(v); //从虚拟设备坐标系转到观察坐标系
+	return VCStoWCS(v); //从观察坐标系转到世界坐标系
+}
 
 //观察窗口宽度与视口宽度的比例
 double CG2DCamera::WidthFactorWindowtoViewPort()
@@ -68,6 +82,10 @@ double CG2DCamera::HeightFactorWindowtoViewPort()
 	return (mTop - mBottom) / mViewPort.height();
 }
 //观察窗口设置
+void CG2DCamera::SetAspectRatio(double aspect) //设置观察窗口的宽高比
+{
+
+}
 void CG2DCamera::SetWindowLeft(double left)
 {
 	if (left < mRight)
@@ -116,11 +134,15 @@ void CG2DCamera::Reset() //重置到观察坐标系默认参数（二维）
 	mMat.setIdentity();
 }
 //视口设置：通过viewport()得到视口
-void CG2DCamera::ViewportOffset(int offleft, int offbottom, int offright, int offtop) //边界移动
+void CG2DCamera::ViewportOffset() //边界移动
+{
+	ViewportOffset(cameraViewportOffleft, cameraViewportOffbottom, cameraViewportOffright, cameraViewportOfftop);
+}
+void CG2DCamera::ViewportOffset(int offleft , int offbottom, int offright, int offtop) //边界移动
 {
 	mViewPort.setLeft(mViewPort.left() + offleft);
 	mViewPort.setBottom(mViewPort.bottom() + offbottom);
-	mViewPort.setWidth(mViewPort.width() + offright - offleft);
+	mViewPort.setWidth(mViewPort.width() + offright);
 	mViewPort.setHeith(mViewPort.height() + offtop - offbottom);
 }
 void CG2DCamera::ViewportSet(int width, int height)
@@ -141,7 +163,9 @@ Vec2d CG2DCamera::VCStoNCS(const Vec2d& p) {
 	Mat3 moveMat = Mat3d::getTranslation(-mLeft, -mBottom);
 	Mat3 scaleMat = Mat3d::getScaling((NCSViewPortRight()- NCSViewPortLeft()) / (mRight - mLeft), (NCSViewPortTop()- NCSViewPortBottom()) / (mTop - mBottom));
 	Mat3 move2Mat = Mat3d::getTranslation(NCSViewPortLeft(), NCSViewPortBottom());
-	int test = NCSViewPortLeft();
+	//int test = NCSViewPortRight();
+	//int test2 = NCSViewPortLeft();
+	//int test3 = NCSViewPortRight()- NCSViewPortLeft();
 	Mat3 nMat = move2Mat * scaleMat * moveMat;
 	Vec3d s = nMat * Vec3d(p);
 	return Vec2d(s.x(), s.y());
@@ -149,11 +173,14 @@ Vec2d CG2DCamera::VCStoNCS(const Vec2d& p) {
 
 //二维图形视口变换（规范坐标系到设备坐标系）（二维）（实验中使用虚拟设备坐标系代替规范化设备坐标系）
 Vec2i CG2DCamera::NCStoDCS(const Vec2d& p) {
-	return Vec2i(p.x(), mClientHeight - p.y());
+	return Vec2i(int(p.x()), int(mClientHeight - p.y()));
 }
 
 //设备坐标系到规范化设备坐标系（二维）（实验中使用虚拟设备坐标系代替规范化设备坐标系）
 Vec2d CG2DCamera::DCStoNCS(const Vec2i& p) {
+	return Vec2d(p.x(), mClientHeight - p.y());
+}
+Vec2d CG2DCamera::DCStoNCS(const Vec2d& p) {
 	return Vec2d(p.x(), mClientHeight - p.y());
 }
 

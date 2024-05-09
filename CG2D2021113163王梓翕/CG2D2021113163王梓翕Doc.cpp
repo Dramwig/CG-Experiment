@@ -159,10 +159,6 @@ CCG2D2021113163王梓翕Doc::CCG2D2021113163王梓翕Doc() noexcept
 	// TODO: 在此添加一次性构造代码
 	mScene = new CG2DScene();
 	mCameras.Add(new CG2DCamera());
-	cameraViewportOffleft = 0;
-	cameraViewportOffbottom = 0;
-	cameraViewportOffright = 0;
-	cameraViewportOfftop = 0;
 
 	//// 测试添加直线段到场景（要包含"CG2DLineSegment.h"），测试完毕后删除。
 	//mScene->addRenderable(new CG2DLineSegment(Vec2d(100, 100), Vec2d(500, 200)));
@@ -223,6 +219,11 @@ bool CCG2D2021113163王梓翕Doc::delReaderable(CG2DRenderable* r)
 	}
 	return false;
 }
+void CCG2D2021113163王梓翕Doc::clearScene()
+{
+	if (mScene)
+		mScene->removeAllRenderable();
+}
 bool CCG2D2021113163王梓翕Doc::RenderScene(CG2DRenderContext* pRC)
 {
 	if (pRC == nullptr)
@@ -236,11 +237,8 @@ bool CCG2D2021113163王梓翕Doc::RenderScene(CG2DRenderContext* pRC)
 		return false;
 	pCamera->SetClientWidth(w);
 	pCamera->SetClientHeight(h);
-	pCamera->viewport().set(cameraViewportOffleft, 
-		cameraViewportOffbottom, 
-		w + cameraViewportOffright - cameraViewportOffleft,
-		h + cameraViewportOfftop - cameraViewportOffbottom
-	);
+	pCamera->viewport().set(0, 0, w ,h);
+	pCamera->ViewportOffset();
 	pRC->Ready(pCamera);
 	bool ret = mScene->Render(pRC, pCamera);
 	pRC->Finish(pCamera);
@@ -334,6 +332,10 @@ void CCG2D2021113163王梓翕Doc::OnUpdateInnerColor(CCmdUI* pCmdUI)
 
 //根据视口坐标获取对应场景坐标（二维）-调用默认相机的转换函数
 Vec2d CCG2D2021113163王梓翕Doc::ViewPorttoWorld(const Vec2i& p)
+{
+	return defaultCamera()->ViewPorttoWorld(p);
+}
+Vec2d CCG2D2021113163王梓翕Doc::ViewPorttoWorld(const Vec2d& p)
 {
 	return defaultCamera()->ViewPorttoWorld(p);
 }
@@ -612,22 +614,14 @@ void CCG2D2021113163王梓翕Doc::WindowReset()
 void CCG2D2021113163王梓翕Doc::CameraWindowOverall() 
 {
 	CG2DCamera* pCamera = defaultCamera();
-	ABox2d box = mScene->BoundingABox();
+	ABox2d box = mScene->BoundingABoxi(pCamera);
 	if (pCamera != nullptr)
 		if (box.isNull()) {
 			WindowReset();
 		}
 		else 
 		{
-			Vec2d lb = defaultCamera()->WCStoVCS(Vec2d(box.left(), box.bottom()));
-			Vec2d lt = defaultCamera()->WCStoVCS(Vec2d(box.left(), box.top()));
-			Vec2d rt = defaultCamera()->WCStoVCS(Vec2d(box.right(), box.top()));
-			Vec2d rb = defaultCamera()->WCStoVCS(Vec2d(box.right(), box.bottom()));
-			double left = std::min({ lb.x(), lt.x(), rt.x(), rb.x() });
-			double bottom = std::min({ lb.y(), lt.y(), rt.y(), rb.y() });
-			double right = std::max({ lb.x(), lt.x(), rt.x(), rb.x() });
-			double top = std::max({ lb.y(), lt.y(), rt.y(), rb.y() });
-			CameraWindowSet(left, bottom, right, top);
+			CameraWindowSet(box.left(), box.bottom(), box.right(), box.top());
 		}
 }
 
@@ -638,20 +632,24 @@ void CCG2D2021113163王梓翕Doc::CameraViewportOffset(int offleft, int offbotto
 	if (pCamera != nullptr)
 	{
 		//pCamera->ViewportOffset(offleft, offbottom, offright, offtop);
+		pCamera->cameraViewportOffleft += offleft;
+		pCamera->cameraViewportOffbottom += offbottom;
+		pCamera->cameraViewportOffright += offright;
+		pCamera->cameraViewportOfftop += offtop;
 	}
-	cameraViewportOffleft+=offleft;
-	cameraViewportOffbottom+=offbottom;
-	cameraViewportOffright+=offright;
-	cameraViewportOfftop+=offtop;
 }
 
 void CCG2D2021113163王梓翕Doc::CameraViewportReset()
 {
-	//CG2DCamera* pCamera = defaultCamera();
-	cameraViewportOffleft = 0;
-	cameraViewportOffbottom = 0;
-	cameraViewportOffright = 0;
-	cameraViewportOfftop = 0;
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		//pCamera->ViewportOffset(offleft, offbottom, offright, offtop);
+		pCamera->cameraViewportOffleft = 0;
+		pCamera->cameraViewportOffbottom = 0;
+		pCamera->cameraViewportOffright = 0;
+		pCamera->cameraViewportOfftop = 0;
+	}
 }
 
 void CCG2D2021113163王梓翕Doc::CameraViewportSet(int width, int height)
@@ -660,5 +658,25 @@ void CCG2D2021113163王梓翕Doc::CameraViewportSet(int width, int height)
 	if (pCamera != nullptr)
 	{
 		pCamera->ViewportSet(width, height);
+	}
+}
+
+void CCG2D2021113163王梓翕Doc::CameraAspectRatio()
+{
+	CG2DCamera* pCamera = defaultCamera();
+	if (pCamera != nullptr)
+	{
+		int l, b, r, t;
+		l = pCamera->viewport().left() + pCamera->cameraViewportOffleft;
+		b = pCamera->viewport().bottom() + pCamera->cameraViewportOffbottom;
+		r = l + pCamera->viewport().width() + pCamera->cameraViewportOffright;
+		t = b + pCamera->viewport().height()+ pCamera->cameraViewportOfftop;
+		int w = r - l;
+		int h = t - b;
+		if (w > 0 && h > 0)
+		{
+			double aspect = (double)w / h;
+			pCamera->SetAspectRatio(aspect);
+		}
 	}
 }

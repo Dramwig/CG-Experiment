@@ -125,6 +125,7 @@ public:
 	bool delReaderable(CG2DRenderable* r);
 	//根据视口坐标获取对应场景坐标（二维）-调用文档类默认相机的转换函数
 	Vec2d ViewPorttoWorld(const Vec2i& p);
+	Vec2d ViewPorttoWorld(const Vec2d& p);
 	Vec2i WorldtoViewPort(const Vec2d& p);
 	afx_msg void OnDrawPolygon();
 	afx_msg void OnUpdateDrawPolygon(CCmdUI* pCmdUI);
@@ -194,8 +195,9 @@ public:
 	afx_msg void OnUpdateWindowBox(CCmdUI* pCmdUI);
 	void CameraMoveOffset(double dx, double dy);
 	void CameraWindowSet(double left, double bottom, double right, double top);
-	afx_msg void OnViewpointOverall();
 	afx_msg void OnWindowOverall();
+	afx_msg void OnAspectRatio();
+	afx_msg void OnRemoveAll();
 };
 
 #ifndef _DEBUG  // CG2D2021113163王梓翕View.cpp 中的调试版本

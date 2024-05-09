@@ -82,9 +82,8 @@
 #define ID_WINDOW_REDUCE                32849
 #define ID_WINDOW_EXPAND                32851
 #define ID_WINDOW_BOX                   32852
-#define ID_VIEWPOINT_OVERALL            32853
 #define ID_WINDOW_OVERALL               32853
-#define ID_BUTTON16                     32854
+#define ID_Aspect_Ratio                 32854
 #define ID_VIEWPOINT_TOP_DECREASE       32864
 #define ID_CAMERA_MOVE                  32865
 #define ID_VIEWPOINT_LEFT_ADD           32866
@@ -115,13 +114,15 @@
 #define ID_VIEWPOINT_RESET              32895
 #define ID_WINDOW_RESET                 32896
 #define ID_TRANSLATE_ROTATE_O           32897
+#define ID_BUTTON14                     32898
+#define ID_REMOVE_ALL                   32898
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32898
+#define _APS_NEXT_COMMAND_VALUE         32899
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

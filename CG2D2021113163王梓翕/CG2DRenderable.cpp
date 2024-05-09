@@ -35,6 +35,7 @@ ABox2d& CG2DRenderable::BoundingABox() //AABB包围盒，可用于设置
 	}
 	return mABox;
 }
+
 void CG2DRenderable::computeBoundingBox() //计算包围盒，需要在派生类中实现
 {
 	//派生类中实现，然后要调用如下函数
@@ -77,6 +78,26 @@ void CG2DRenderable::DrawSelectedBoundingBox(HDC hDC, CG2DRenderable* renderable
 			HPEN hOldPen = (HPEN)::SelectObject(hDC, pen.GetSafeHandle());
 			HBRUSH hOldBrush = (HBRUSH)::SelectObject(hDC, (HBRUSH)GetStockObject(NULL_BRUSH));
 			::Rectangle(hDC, v1.x(), v1.y(), v2.x(), v2.y()); // 绘制包围盒
+			::SelectObject(hDC, hOldPen);
+			::SelectObject(hDC, hOldBrush);
+		}
+	}
+}
+
+void CG2DRenderable::DrawSelectedBoundingBoxi(HDC hDC, CG2DRenderable* renderable, CG2DCamera* pCamera) //绘制选中包围盒
+{
+	if (status() == CG2DRenderable::sSelected) //对象处于选中状态
+	{
+		//以包围盒绘制选中状态
+		ABox2i abox = BoundingABoxi(pCamera);
+		Vec2i vb1 = abox.minCorner();
+		Vec2i vb2 = abox.maxCorner();
+		CPen pen(PS_DASHDOT, 1, RGB(0, 0, 255));
+		if (hDC != 0)
+		{
+			HPEN hOldPen = (HPEN)::SelectObject(hDC, pen.GetSafeHandle());
+			HBRUSH hOldBrush = (HBRUSH)::SelectObject(hDC, (HBRUSH)GetStockObject(NULL_BRUSH));
+			::Rectangle(hDC, vb1.x(), vb1.y(), vb2.x(), vb2.y());
 			::SelectObject(hDC, hOldPen);
 			::SelectObject(hDC, hOldBrush);
 		}

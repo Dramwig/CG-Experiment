@@ -138,6 +138,8 @@ BEGIN_MESSAGE_MAP(CCG2D2021113163王梓翕View, CView)
 	ON_COMMAND(ID_WINDOW_BOX, &CCG2D2021113163王梓翕View::OnWindowBox)
 	ON_UPDATE_COMMAND_UI(ID_WINDOW_BOX, &CCG2D2021113163王梓翕View::OnUpdateWindowBox)
 	ON_COMMAND(ID_WINDOW_OVERALL, &CCG2D2021113163王梓翕View::OnWindowOverall)
+	ON_COMMAND(ID_Aspect_Ratio, &CCG2D2021113163王梓翕View::OnAspectRatio)
+	ON_COMMAND(ID_REMOVE_ALL, &CCG2D2021113163王梓翕View::OnRemoveAll)
 END_MESSAGE_MAP()
 
 // CCG2D2021113163王梓翕View 构造/析构
@@ -1151,6 +1153,14 @@ Vec2d CCG2D2021113163王梓翕View::ViewPorttoWorld(const Vec2i& p)
 		return Vec2d();
 	return pDoc->ViewPorttoWorld(p);
 }
+Vec2d CCG2D2021113163王梓翕View::ViewPorttoWorld(const Vec2d& p)
+{
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return Vec2d();
+	return pDoc->ViewPorttoWorld(p);
+}
 Vec2i CCG2D2021113163王梓翕View::WorldtoViewPort(const Vec2d& p)
 {
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
@@ -1743,7 +1753,7 @@ void CCG2D2021113163王梓翕View::OnViewpointBottomAdd()
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraViewportOffset(0, 10, 0, 0);
+		pDoc->CameraViewportOffset(0, 0, 0, -10);
 		Invalidate(true);
 	}
 }
@@ -1755,7 +1765,7 @@ void CCG2D2021113163王梓翕View::OnViewpointBottomDecrease()
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraViewportOffset(0, -10, 0, 0);
+		pDoc->CameraViewportOffset(0, 0, 0, 10);
 		Invalidate(true);
 	}
 }
@@ -1767,7 +1777,7 @@ void CCG2D2021113163王梓翕View::OnViewpointTopAdd()
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraViewportOffset(0, 0, 0, 10);
+		pDoc->CameraViewportOffset(0, -10, 0, 0);
 		Invalidate(true);
 	}
 }
@@ -1780,7 +1790,7 @@ void CCG2D2021113163王梓翕View::OnViewpointTopDecrease()
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraViewportOffset(0, 0, 0, -10);
+		pDoc->CameraViewportOffset(0, 10, 0, 0);
 		Invalidate(true);
 	}
 }
@@ -1852,7 +1862,7 @@ void CCG2D2021113163王梓翕View::CameraMoveOffset(double dx, double dy)
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->MoveCamera(dx, dy); //假定每次移动5个单位
+		pDoc->MoveCamera(dx, dy); 
 		Invalidate(true); //实时显示
 	}
 }
@@ -1862,7 +1872,7 @@ void CCG2D2021113163王梓翕View::CameraWindowSet(double left, double bottom, d
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraWindowSet(left, bottom, right, top); //假定每次移动5个单位
+		pDoc->CameraWindowSet(left, bottom, right, top);
 		Invalidate(true); //实时显示
 	}
 }
@@ -1873,7 +1883,31 @@ void CCG2D2021113163王梓翕View::OnWindowOverall()
 	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
 	if (pDoc)
 	{
-		pDoc->CameraWindowOverall(); //假定每次移动5个单位
+		pDoc->CameraWindowOverall(); 
+		Invalidate(true); //实时显示
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnAspectRatio()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->CameraAspectRatio(); //假定每次移动5个单位
+		Invalidate(true); //实时显示
+	}
+}
+
+
+void CCG2D2021113163王梓翕View::OnRemoveAll()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG2D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->clearScene(); //假定每次移动5个单位
 		Invalidate(true); //实时显示
 	}
 }

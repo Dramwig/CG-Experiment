@@ -32,7 +32,8 @@ public:
     std::vector<Vec2d>& getPoints() {
         return mPoints;
     }
-
+    virtual ABox2i BoundingABoxi(CG2DCamera* pCamera); //获取在视口内的包围盒(仅用于绘制对象的包围盒）
+    
 protected:
     std::vector<Vec2d> mPoints; // 折线上的点集合
 };

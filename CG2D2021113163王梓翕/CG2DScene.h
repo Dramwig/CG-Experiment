@@ -24,6 +24,7 @@ public:
 	bool Render(CG2DRenderContext* pRC, CG2DCamera* pCamera);
 	//二维场景包围盒计算
 	ABox2d BoundingABox();
+	ABox2d BoundingABoxi(CG2DCamera* pCamera);
 protected:
 	//图形对象列表
 	CTypedPtrArray<CObArray, CG2DRenderable*> mRenderables;
