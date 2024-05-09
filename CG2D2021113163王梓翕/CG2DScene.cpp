@@ -169,6 +169,25 @@ ABox2d CG2DScene::BoundingABox()
 	}
 	return box;
 }
+//二维场景包围盒计算
+ABox2d CG2DScene::BoundingABoxi(CG2DCamera* pCamera)
+{
+	ABox2d box;
+	size_t i = 0, cnt = mRenderables.GetSize();
+	while (i < cnt)
+	{
+		CG2DRenderable* r = mRenderables.GetAt(i);
+		if (r != nullptr)
+		{
+			ABox2i box2 = ((CG2DRenderable*)r)->BoundingABoxi(pCamera);
+			ABox2d box3 = ABox2d(pCamera->NCStoVCS(pCamera->DCStoNCS(Vec2d(box2.left(), box2.top()))), 
+				pCamera->NCStoVCS(pCamera->DCStoNCS(Vec2d(box2.right(), box2.bottom()))));
+			box.extend(box3);
+		}
+		i++;
+	}
+	return box;
+}
 
 //更新选择（如果拾取对象成功，则替换选择集，返回拾取的对象）
 CG2DRenderable* CG2DScene::UpdatePicked(const Vec2d& p, double radius) //点选

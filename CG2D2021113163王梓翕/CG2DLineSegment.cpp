@@ -80,7 +80,7 @@ void CG2DLineSegment::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera) //绘制
 	else if (algrithm == (int)LineAlgorithm::Bresenham)
 		pRC->BresenhamLine(v1.x(), v1.y(), v2.x(), v2.y(), penColor());
 	//此处仅以绘制对象包围盒的方式显示对象被选中，也可以自行确定选中显示方式
-	DrawSelectedBoundingBox(hDC, this, pCamera);
+	DrawSelectedBoundingBoxi(hDC, this, pCamera);
 }
 
 //包围盒与拾取相关
@@ -126,7 +126,7 @@ bool CG2DLineSegment::Picked(const Vec2d& p, double radius) //是否拾取到
 	return false;
 }
 
-//+3，获取在视口内的包围盒(仅用于绘制对象的包围盒）
+// 获取在视口内的包围盒(仅用于绘制对象的包围盒）
 ABox2i CG2DLineSegment::BoundingABoxi(CG2DCamera* pCamera)
 {
 	Vec3d s = mMat * Vec3d(mStart); //根据几何变换计算实际起点

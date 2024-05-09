@@ -4,6 +4,7 @@
 #include "CG2D2021113163王梓翕View.h" //用户交互绘制，并将图形对象通过Doc添加到场景
 #include "CG2DLineSegment.h"
 #include "CG2DCircle.h"
+#include "CG2DPolygon.h"
 
 CG2DCircleCenterRadiusCreateCommand::CG2DCircleCenterRadiusCreateCommand(CView* pview/* = nullptr*/)
 	:UIEventListener(pview), mCenter(0, 0), mEdgePoint(0, 0)
@@ -50,15 +51,18 @@ int CG2DCircleCenterRadiusCreateCommand::OnLButtonDown(UINT nFlags, CPoint pos)
 		//创建对象要注意坐标转换到场景，并设置相应的属性
 		//获取起点、终点对应的场景坐标用于创建直线段对象
 
-		//创建线段并添加到场景
-		Vec2d center = view->ViewPorttoWorld(Vec2i(mCenter.x, mCenter.y));
-		Vec2d edgePoint = view->ViewPorttoWorld(Vec2i(mEdgePoint.x, mEdgePoint.y));
-		int Radius = static_cast<int>(sqrt(pow(edgePoint[0] - center[0], 2) + pow(edgePoint[1] - center[1], 2)));
-		CG2DCircle* circle = new CG2DCircle(center, Radius);
-		circle->setPenColor(view->PenColor());
-		circle->setPenWidth(view->PenWidth());
-		circle->setPenStyle(view->PenStyle());
-		view->addRenderable(circle); //创建成功，添加到场景
+		int Radius = static_cast<int>(sqrt(pow(mCenter.x - mEdgePoint.x, 2) 
+			+ pow(mCenter.y - mEdgePoint.y, 2)));
+		CG2DPolygon* polygon = new CG2DPolygon();
+		polygon->setPenColor(view->PenColor());
+		polygon->setPenWidth(view->PenWidth());
+		polygon->setPenStyle(view->PenStyle());
+		for(double theta = 0; theta < 2*PI; theta += 2*PI  / 100) {
+			Vec2d p = Vec2d(mCenter.x + Radius * cos(theta), mCenter.y + Radius * sin(theta));
+			p = view->ViewPorttoWorld(Vec2d(p.x(), p.y()));
+			polygon->addPoint(p);
+		}
+		view->addRenderable(polygon); //创建成功，添加到场景
 		view->Invalidate(); //客户区需要重绘
 		view->UpdateWindow(); //客户区执行重绘
 		mStep = 0; //设为0可重写开始绘制线段而不用点击命令面板上的线段按钮

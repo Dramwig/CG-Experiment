@@ -79,7 +79,7 @@ void CG2DPolyline::Render(CG2DRenderContext* pRC, CG2DCamera* pCamera) {
 
     }
     //此处仅以绘制对象包围盒的方式显示对象被选中，也可以自行确定选中显示方式
-    DrawSelectedBoundingBox(hDC, this, pCamera);
+    DrawSelectedBoundingBoxi(hDC, this, pCamera);
 }
 
 void CG2DPolyline::computeBoundingBox() {
@@ -123,4 +123,16 @@ CPoint CG2DPolyline::back() {
 
 void CG2DPolyline::pop() {
 	mPoints.pop_back();
+}
+
+// 获取在视口内的包围盒(仅用于绘制对象的包围盒）
+ABox2i CG2DPolyline::BoundingABoxi(CG2DCamera* pCamera)
+{
+    ABox2i abox;
+    for (const auto& vertex : mPoints) {
+        Vec3d s = mMat * Vec3d(vertex);
+        Vec2i v = pCamera->WorldtoViewPort(Vec2d(s.x(), s.y()));
+        abox.addPoint(v);
+    }
+    return abox;
 }

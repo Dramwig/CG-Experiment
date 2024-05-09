@@ -62,6 +62,7 @@ public:
 	virtual bool Picked(const Vec2d& p, double radius); //（二维）是否拾取到
 	virtual bool Picked(const ABox2d& box); //（二维）是否拾取到
 	virtual void DrawSelectedBoundingBox(HDC hDC, CG2DRenderable* renderable, CG2DCamera* pCamera); //绘制选中包围盒
+	virtual void DrawSelectedBoundingBoxi(HDC hDC, CG2DRenderable* renderable, CG2DCamera* pCamera); //绘制选中包围盒
 	//图形几何变换
 	virtual void Translate(double tx, double ty); //平移
 	virtual void Rotate(double angle, double cx, double cy); //旋转（逆时针为正，度）

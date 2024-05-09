@@ -72,6 +72,7 @@ public:
 	//图形对象添加到场景
 	bool addRenderable(CG2DRenderable* r);
 	bool delReaderable(CG2DRenderable* r);
+	void clearScene();
 	afx_msg void OnUpdatePenColor(CCmdUI* pCmdUI);
 	afx_msg void OnUpdatePenWidth(CCmdUI* pCmdUI);
 	afx_msg void OnUpdatePenStyle(CCmdUI* pCmdUI);
@@ -89,6 +90,7 @@ public:
 public:
 	//根据视口坐标获取对应场景坐标（二维）-调用默认相机的转换函数
 	Vec2d ViewPorttoWorld(const Vec2i& p);
+	Vec2d ViewPorttoWorld(const Vec2d& p);
 	Vec2i WorldtoViewPort(const Vec2d& p);
 public:
 	//更新选择（如果拾取对象成功，则替换选择集，返回拾取的对象）
@@ -131,6 +133,5 @@ public:
 	void CameraViewportOffset(int offleft, int offbottom, int offright, int offtop); //边界移动
 	void CameraViewportSet(int width, int height);
 	void CameraViewportReset();
-protected:
-	int cameraViewportOffleft, cameraViewportOffbottom, cameraViewportOffright, cameraViewportOfftop;
+	void CameraAspectRatio();
 };
