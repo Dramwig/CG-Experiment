@@ -72,4 +72,11 @@ public:
 	//图形对象添加到场景 
 	bool addRenderable(CG3DRenderable* r);
 	bool delReaderable(CG3DRenderable* r);
+	afx_msg void OnUpdatePenColor(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePenWidth(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePenStyle(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePenFill(CCmdUI* pCmdUI);
+	void AddRenderable(CG3DRenderable* R);
+	afx_msg void RemoveAll();
+	afx_msg void OnUpdateRotate(CCmdUI* pCmdUI);
 };

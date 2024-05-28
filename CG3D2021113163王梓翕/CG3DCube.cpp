@@ -17,7 +17,7 @@ CG3DCube::CG3DCube(double size) //给定边长
 }
 
 CG3DCube::CG3DCube(const CG3DCube& other)
-	: CG3DRenderable(CString("CG3DTriStrip")), mSize(other.mSize)
+	: CG3DRenderable(CString("CG3DCube")), mSize(other.mSize)
 {
 	mName.Format(_T("立方体-%ld"), sID);
 }

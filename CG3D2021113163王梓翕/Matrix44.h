@@ -3,6 +3,7 @@
 
 #include "Vector4.h"
 #include "Matrix33.h"
+#include <cassert>
 
 template <typename T> class Matrix44
 {

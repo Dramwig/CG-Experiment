@@ -65,6 +65,27 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnDestroy();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+public:
+	//画笔属性 
+	COLORREF PenColor() const;
+	int PenWidth() const;
+	int PenStyle() const;
+	int PenFill() const;
+	int Rotate() const;
+	//显示提示信息 
+	void Prompt(const CString& str);
+	afx_msg void OnTriangularfan();
+	afx_msg void OnClosedfoldedline();
+	afx_msg void OnLinesegment();
+	afx_msg void OnFoldedline();
+	afx_msg void OnPolygon();
+	afx_msg void OnTriangle();
+	afx_msg void OnQuad();
+	afx_msg void OnTriangularstrip();
+	afx_msg void OnQuadstrip();
+	afx_msg void OnRemoveAll();
+	afx_msg void OnSphere();
 };
 
 #ifndef _DEBUG  // CG3D2021113163王梓翕View.cpp 中的调试版本

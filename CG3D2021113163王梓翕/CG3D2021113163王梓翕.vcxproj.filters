@@ -90,7 +90,37 @@
     <ClInclude Include="CG3DScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CG3DBaseDrawTest.h">
+    <ClInclude Include="CG3DLineSegment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DFoldedLine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DClosedFoldedLine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DPolygon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DTriangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DQuad.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DTriangularFan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DTriangularStrip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DQuadStrip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DSphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputDialog1.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -158,7 +188,37 @@
     <ClCompile Include="CG3DScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CG3DBaseDrawTest.cpp">
+    <ClCompile Include="CG3DLineSegment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DFoldedLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DClosedFoldedLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DPolygon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DTriangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DQuad.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DTriangularFan.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DTriangularStrip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DQuadStrip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DSphere.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputDialog1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

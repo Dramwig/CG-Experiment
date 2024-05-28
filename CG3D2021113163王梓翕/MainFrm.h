@@ -54,7 +54,15 @@ protected:  // 控件条嵌入成员
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
-
+public:
+	//画笔属性 
+	COLORREF PenColor() const;
+	int PenWidth() const;
+	int PenStyle() const;
+	int PenFill() const;
+	int Rotate() const;
+	void ShowPrompt(const CString& str);
+	void ShowCoordOnStatusBar(const CString& str);
 };
 
 

@@ -22,19 +22,36 @@
 #define IDR_WINDOWS_MENU                152
 #define IDS_EDIT_MENU                   306
 #define IDR_RIBBON                      307
+#define IDD_DIALOG1                     310
+#define IDC_INPUT_VALUE1                310
+#define IDC_EDIT1                       1000
+#define IDC_EDIT2                       1001
+#define IDC_EDIT3                       1002
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_PEN_WIDTH                    32771
 #define ID_PEN_STYLE                    32772
-#define ID_COMBO3                       32773
 #define ID_PEN_FILL                     32773
+#define ID_PEN_COLOR                    32774
+#define ID_QuadStrip                    32775
+#define ID_LineSegment                  32776
+#define ID_ClosedFoldedLine             32777
+#define ID_FoldedLine                   32778
+#define ID_Polygon                      32779
+#define ID_Quad                         32780
+#define ID_Triangle                     32781
+#define ID_TriangularFan                32782
+#define ID_TriangularStrip              32783
+#define ID_REMOVE_ALL                   32784
+#define ID_ROTATE                       32785
+#define ID_SPHERE                       32787
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32774
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_RESOURCE_VALUE        312
+#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

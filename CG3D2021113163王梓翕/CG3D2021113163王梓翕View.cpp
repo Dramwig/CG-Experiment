@@ -22,6 +22,19 @@
 
 #include "CG3D2021113163王梓翕Doc.h"
 #include "CG3D2021113163王梓翕View.h"
+#include "MainFrm.h"
+#include "CG3DCube.h" 
+#include "CG3DClosedFoldedLine.h"
+#include "CG3DFoldedLine.h"
+#include "CG3DLineSegment.h"
+#include "CG3DPolygon.h"
+#include "CG3DQuad.h"
+#include "CG3DQuadStrip.h"
+#include "CG3DTriangle.h"
+#include "CG3DTriangularFan.h"
+#include "CG3DTriangularStrip.h"
+#include "CG3DSphere.h"
+#include "CInputDialog1.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -38,6 +51,17 @@ BEGIN_MESSAGE_MAP(CCG3D2021113163王梓翕View, CView)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_WM_SIZE()
+	ON_COMMAND(ID_TriangularFan, &CCG3D2021113163王梓翕View::OnTriangularfan)
+	ON_COMMAND(ID_ClosedFoldedLine, &CCG3D2021113163王梓翕View::OnClosedfoldedline)
+	ON_COMMAND(ID_LineSegment, &CCG3D2021113163王梓翕View::OnLinesegment)
+	ON_COMMAND(ID_FoldedLine, &CCG3D2021113163王梓翕View::OnFoldedline)
+	ON_COMMAND(ID_Polygon, &CCG3D2021113163王梓翕View::OnPolygon)
+	ON_COMMAND(ID_Triangle, &CCG3D2021113163王梓翕View::OnTriangle)
+	ON_COMMAND(ID_Quad, &CCG3D2021113163王梓翕View::OnQuad)
+	ON_COMMAND(ID_TriangularStrip, &CCG3D2021113163王梓翕View::OnTriangularstrip)
+	ON_COMMAND(ID_QuadStrip, &CCG3D2021113163王梓翕View::OnQuadstrip)
+	ON_COMMAND(ID_REMOVE_ALL, &CCG3D2021113163王梓翕View::OnRemoveAll)
+	ON_COMMAND(ID_SPHERE, &CCG3D2021113163王梓翕View::OnSphere)
 END_MESSAGE_MAP()
 
 // CCG3D2021113163王梓翕View 构造/析构
@@ -256,4 +280,352 @@ void CCG3D2021113163王梓翕View::OnSize(UINT nType, int cx, int cy)
 	__super::OnSize(nType, cx, cy);
 
 	// TODO: 在此处添加消息处理程序代码
+}
+
+//画笔属性 
+COLORREF CCG3D2021113163王梓翕View::PenColor() const
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (!pMainWnd)
+		return RGB(0, 0, 0);
+	return pMainWnd->PenColor();
+}
+
+
+int CCG3D2021113163王梓翕View::PenWidth() const
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (!pMainWnd)
+		return 1;
+	return pMainWnd->PenWidth();
+}
+
+
+int CCG3D2021113163王梓翕View::PenStyle() const
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (!pMainWnd)
+		return 0;
+	return pMainWnd->PenStyle();
+}
+
+int CCG3D2021113163王梓翕View::PenFill() const
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (!pMainWnd)
+		return 0;
+	return pMainWnd->PenFill();
+}
+
+int CCG3D2021113163王梓翕View::Rotate() const
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (!pMainWnd)
+		return 45;
+	return pMainWnd->Rotate();
+}
+
+//状态栏上显示提示信息 
+void CCG3D2021113163王梓翕View::Prompt(const CString& str)
+{
+	CMainFrame* pMainWnd = (CMainFrame*)AfxGetMainWnd();
+	if (pMainWnd != nullptr)
+	{
+		pMainWnd->ShowPrompt(str);
+	}
+}
+
+void CCG3D2021113163王梓翕View::OnTriangularfan()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DTriangularFan* cube = new CG3DTriangularFan();
+		cube->addPoint(Vec3f(0, 0, 0));
+		cube->addPoint(Vec3f(-400, 0, 0));
+		cube->addPoint(Vec3f(-300, -300, 0));
+		cube->addPoint(Vec3f(0, -400, 0));
+		cube->addPoint(Vec3f(300, -300, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+		//CString str;
+		//str.Format(_T("%d"), Rotate()); // 格式化整数为字符串
+		//Prompt(str); // 显示整数
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnClosedfoldedline()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DClosedFoldedLine* cube = new CG3DClosedFoldedLine();
+		cube->addPoint(Vec3f(0, 0, 0));
+		cube->addPoint(Vec3f(1000, 0, 0));
+		cube->addPoint(Vec3f(0, 1000, 0));
+		cube->addPoint(Vec3f(-500, 0, 0));
+		cube->addPoint(Vec3f(0, -100, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnLinesegment()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DLineSegment* cube = new CG3DLineSegment();
+		cube->addPoint(Vec3f(-100, 0, 0));
+		cube->addPoint(Vec3f(0, 300, 0));
+		cube->addPoint(Vec3f(100, 0, 0));
+		cube->addPoint(Vec3f(200, 300, 0));
+		cube->addPoint(Vec3f(300, 0, 0));
+		cube->addPoint(Vec3f(400, 300, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnFoldedline()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DFoldedLine* cube = new CG3DFoldedLine();
+		cube->addPoint(Vec3f(0, 0, 0));
+		cube->addPoint(Vec3f(1000, 0, 0));
+		cube->addPoint(Vec3f(0, 1000, 0));
+		cube->addPoint(Vec3f(-500, 0, 0));
+		cube->addPoint(Vec3f(0, -100, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnPolygon()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DPolygon* cube = new CG3DPolygon();
+		cube->addPoint(Vec3f(0, 0, 0));
+		cube->addPoint(Vec3f(400, 0, 0));
+		cube->addPoint(Vec3f(500, 400, 0));
+		cube->addPoint(Vec3f(200, 600, 0));
+		cube->addPoint(Vec3f(-100, 400, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnTriangle()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DTriangle* cube = new CG3DTriangle();
+		cube->addPoint(Vec3f(0, 0, 100));
+		cube->addPoint(Vec3f(100, 0, 0));
+		cube->addPoint(Vec3f(0, 100, 0));
+		cube->addPoint(Vec3f(200, 0, 100));
+		cube->addPoint(Vec3f(300, 0, 0));
+		cube->addPoint(Vec3f(200, 100, 0));
+		cube->addPoint(Vec3f(400, 0, 100));
+		cube->addPoint(Vec3f(500, 0, 0));
+		cube->addPoint(Vec3f(400, 100, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnQuad()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DQuad* cube = new CG3DQuad();  //只会绘制一个
+		cube->addPoint(Vec3f(-100, 100, 0));
+		cube->addPoint(Vec3f(-100, -100, 0));
+		cube->addPoint(Vec3f(100, -100, 0));
+		cube->addPoint(Vec3f(100, 100, 0));
+		cube->addPoint(Vec3f(300, 100, 0));
+		cube->addPoint(Vec3f(400, -100, 0));
+		cube->addPoint(Vec3f(400, -100, 0));
+		cube->addPoint(Vec3f(300, 100, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnTriangularstrip()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DTriangularStrip* cube = new CG3DTriangularStrip();
+		cube->addPoint(Vec3f(-100, 100, 0));
+		cube->addPoint(Vec3f(-100, -100, 0));
+		cube->addPoint(Vec3f(0, 100, 0));
+		cube->addPoint(Vec3f(0, -100, 0));
+		cube->addPoint(Vec3f(100, 100, 0));
+		cube->addPoint(Vec3f(100, -100, 0));
+		cube->addPoint(Vec3f(200, 100, 0));
+		cube->addPoint(Vec3f(200, -100, 0));
+		cube->addPoint(Vec3f(300, 200, 0));
+		cube->addPoint(Vec3f(300, -200, 0));
+		cube->addPoint(Vec3f(500, 0, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnQuadstrip()
+{
+	// TODO: 在此添加命令处理程序代码
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CG3DQuadStrip* cube = new CG3DQuadStrip();
+		cube->addPoint(Vec3f(-100, 100, 0));
+		cube->addPoint(Vec3f(-100, -100, 0));
+		cube->addPoint(Vec3f(100, 100, 0));
+		cube->addPoint(Vec3f(100, -100, 0));
+		cube->addPoint(Vec3f(300, 100, 0));
+		cube->addPoint(Vec3f(300, -100, 0));
+		cube->addPoint(Vec3f(500, 100, 0));
+		cube->addPoint(Vec3f(500, -100, 0));
+		cube->addPoint(Vec3f(700, 200, 0));
+		cube->addPoint(Vec3f(700, 0, 0));
+		cube->addPoint(Vec3f(900, 200, 0));
+		cube->addPoint(Vec3f(900, 0, 0));
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnRemoveAll()
+{
+	// TODO: 在此添加命令处理程序代码
+	
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		pDoc->RemoveAll();
+		Invalidate(true);
+		UpdateWindow();
+	}
+}
+
+
+void CCG3D2021113163王梓翕View::OnSphere()
+{
+	// TODO: 在此添加命令处理程序代码
+	
+	
+	CCG3D2021113163王梓翕Doc* pDoc = GetDocument();
+	if (pDoc)
+	{
+		CInputDialog1 dlg;
+		dlg.mTitle = _T("请输入球体属性"); //根据需要设置对话框标题 
+		CG3DSphere* cube = new CG3DSphere();
+		cube->setRadius(1000);
+		cube->setSlices(20);
+		cube->setStacks(4);
+		if (dlg.DoModal() == IDOK) //对话框中点击了【确定】按钮，取回输入的数据 
+		{
+			//根据实际需要使用输入的数据 
+			//假如输入的是数值，则将字符串转换为数值 
+			double Radius = _ttof(dlg.mValue1);
+			int Slices = _ttof(dlg.mValue2);
+			int Stacks = _ttof(dlg.mValue3);
+			cube->setRadius(Radius);
+			cube->setSlices(Slices);
+			cube->setStacks(Stacks);
+
+			//此处只显示输入的数据 
+			//AfxMessageBox(dlg.mValue1);
+			//AfxMessageBox(dlg.mValue2);
+			//AfxMessageBox(dlg.mValue3);
+		}
+		cube->Rotate(Rotate(), 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
+		cube->setPenColor(PenColor());
+		cube->setPenWidth(PenWidth());
+		cube->setPenStyle(PenStyle());
+		cube->setPenFill(PenFill());
+		pDoc->AddRenderable(cube);
+		Invalidate(true);
+		UpdateWindow();
+	}
 }

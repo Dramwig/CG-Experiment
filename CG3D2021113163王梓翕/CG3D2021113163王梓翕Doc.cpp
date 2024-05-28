@@ -23,7 +23,15 @@
 #include "CG3D2021113163王梓翕Doc.h"
 #include <propkey.h>
 #include "CG3DCube.h" 
-#include "CG3DBaseDrawTest.h"
+#include "CG3DClosedFoldedLine.h"
+#include "CG3DFoldedLine.h"
+#include "CG3DLineSegment.h"
+#include "CG3DPolygon.h"
+#include "CG3DQuad.h"
+#include "CG3DQuadStrip.h"
+#include "CG3DTriangle.h"
+#include "CG3DTriangularFan.h"
+#include "CG3DTriangularStrip.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -34,6 +42,11 @@
 IMPLEMENT_DYNCREATE(CCG3D2021113163王梓翕Doc, CDocument)
 
 BEGIN_MESSAGE_MAP(CCG3D2021113163王梓翕Doc, CDocument)
+	ON_UPDATE_COMMAND_UI(ID_PEN_COLOR, &CCG3D2021113163王梓翕Doc::OnUpdatePenColor)
+	ON_UPDATE_COMMAND_UI(ID_PEN_WIDTH, &CCG3D2021113163王梓翕Doc::OnUpdatePenWidth)
+	ON_UPDATE_COMMAND_UI(ID_PEN_STYLE, &CCG3D2021113163王梓翕Doc::OnUpdatePenStyle)
+	ON_UPDATE_COMMAND_UI(ID_PEN_FILL, &CCG3D2021113163王梓翕Doc::OnUpdatePenFill)
+	ON_UPDATE_COMMAND_UI(ID_ROTATE, &CCG3D2021113163王梓翕Doc::OnUpdateRotate)
 END_MESSAGE_MAP()
 
 
@@ -49,9 +62,9 @@ CCG3D2021113163王梓翕Doc::CCG3D2021113163王梓翕Doc() noexcept
 	//CG3DCube* cube = new CG3DCube(600);
 	//cube->Rotate(45, 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
 	//mScene->addRenderable(cube);
-	CG3DBaseDrawTest* cube = new CG3DBaseDrawTest();
+	//CG3DTriangularFan* cube = new CG3DTriangularFan();
 	//cube->Rotate(45, 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
-	mScene->addRenderable(cube);
+	//mScene->addRenderable(cube);
 
 }
 
@@ -210,4 +223,51 @@ bool CCG3D2021113163王梓翕Doc::RenderScene(CG3DRenderContext * pRC)
 	bool ret = mScene->Render(pRC, pCamera);
 	pRC->Finish(pCamera);
 	return ret;
+}
+
+void CCG3D2021113163王梓翕Doc::OnUpdatePenColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpdatePenWidth(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpdatePenStyle(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpdatePenFill(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+
+void CCG3D2021113163王梓翕Doc::AddRenderable(CG3DRenderable* R) {
+	mScene->addRenderable(R);
+}
+
+
+
+void CCG3D2021113163王梓翕Doc::RemoveAll()
+{
+	// TODO: 在此添加命令处理程序代码
+	mScene->removeAllRenderable();
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpdateRotate(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
 }

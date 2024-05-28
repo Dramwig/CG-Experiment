@@ -123,3 +123,60 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 // CMainFrame 消息处理程序
 
+//画笔属性 
+COLORREF CMainFrame::PenColor() const
+{
+	CMFCRibbonColorButton* pPenColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_PEN_COLOR);
+	if (pPenColor)
+		return pPenColor->GetColor();
+	return RGB(0, 0, 0);
+}
+
+
+int CMainFrame::PenWidth() const
+{
+	CMFCRibbonEdit* pPenWidth = (CMFCRibbonEdit*)m_wndRibbonBar.FindByID(ID_PEN_WIDTH);
+	if (pPenWidth)
+		return _ttoi(pPenWidth->GetEditText());
+	return 1;
+}
+
+int CMainFrame::Rotate() const
+{
+	CMFCRibbonEdit* pRotate = (CMFCRibbonEdit*)m_wndRibbonBar.FindByID(ID_ROTATE);
+	if (pRotate)
+		return _ttoi(pRotate->GetEditText());
+	return 45;
+}
+
+
+int CMainFrame::PenStyle() const
+{
+	CMFCRibbonComboBox* pPenStyle = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_PEN_STYLE);
+	if (pPenStyle)
+		return pPenStyle->GetCurSel();
+	return 0;
+}
+
+int CMainFrame::PenFill() const
+{
+	CMFCRibbonComboBox* pPenFill = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_PEN_FILL);
+	if (pPenFill)
+		return pPenFill->GetCurSel();
+	return 0;
+}
+//在状态栏上显示提示信息 
+void CMainFrame::ShowPrompt(const CString& str)
+{
+	m_wndStatusBar.GetElement(0)->SetText(str);
+	m_wndStatusBar.Invalidate();
+	m_wndStatusBar.UpdateWindow();
+}
+//在状态栏上显示视口坐标、世界坐标 
+void CMainFrame::ShowCoordOnStatusBar(const CString& str)
+{
+	m_wndStatusBar.GetExElement(0)->SetText(str);
+	m_wndStatusBar.Invalidate();
+	m_wndStatusBar.UpdateWindow();
+}
