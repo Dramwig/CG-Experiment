@@ -18,6 +18,7 @@
 #include "CG3DCamera.h" 
 #include "CG3DRenderContext.h" 
 #include "CG3DRenderable.h" 
+#include "CG3DRubiksCube.h"
 
 
 class CCG3D2021113163王梓翕Doc : public CDocument
@@ -65,6 +66,7 @@ public:
 	CG3DCamera* defaultCamera() { return mCameras.GetAt(0); }
 private:
 	CG3DScene* mScene;  //场景 
+	CG3DRubiksCube* mRubiksCube= nullptr; //魔方
 	CTypedPtrArray<CObArray, CG3DCamera*> mCameras; //相机 
 public:
 	//渲染场景到指定客户区 
@@ -79,4 +81,26 @@ public:
 	void AddRenderable(CG3DRenderable* R);
 	afx_msg void RemoveAll();
 	afx_msg void OnUpdateRotate(CCmdUI* pCmdUI);
+	afx_msg void OnUpRotatePos();
+	afx_msg void OnUpRotateNeg();
+	afx_msg void OnRightRotatePos();
+	afx_msg void OnRightRotateNeg();
+	afx_msg void OnFrontRotatePos();
+	afx_msg void OnFrontRotateNeg();
+	afx_msg void OnLeftRotatePos();
+	afx_msg void OnLeftRotateNeg();
+	afx_msg void OnBackRotatePos();
+	afx_msg void OnBackRotateNeg();
+	afx_msg void OnDownRotatePos();
+	afx_msg void OnDownRotateNeg();
+	afx_msg void OnLeftView();
+	afx_msg void OnRightView();
+	afx_msg void OnFrontView();
+	afx_msg void OnBackView();
+	afx_msg void OnCreateRubikscube();
+	afx_msg void OnDownView();
+	afx_msg void OnUpView();
+	afx_msg void OnSubView();
+	afx_msg void OnWindowsPos();
+	afx_msg void OnWindowsNeg();
 };

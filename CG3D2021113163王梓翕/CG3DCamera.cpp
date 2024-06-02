@@ -72,6 +72,9 @@ void CG3DCamera::Move(double tx, double ty, double tz) //移动观察坐标系（三维）
 	mEyeY += ty;
 	mEyeZ += tz;
 }
+void CG3DCamera::SetEye(double x, double y, double z) {
+	mEyeX = x; mEyeY = y; mEyeZ = z;
+}
 
 //观察窗口缩放。用于交互获取观察窗口（在客户区中框出） 
 void CG3DCamera::Zoom(const Vec2d& lb, const Vec2d& rt)
@@ -96,6 +99,11 @@ void CG3DCamera::Zoom(const Vec2d& lb, const Vec2d& rt)
 		mBottom = -h / 2;
 		mTop = h / 2;
 	}
+}
+void CG3DCamera::Zoom(double r) {
+	const Vec2d& lb = Vec2d(mLeft, mBottom);
+	const Vec2d& rt = Vec2d(mRight, mTop);
+	Zoom(lb * r, rt * r);
 }
 void CG3DCamera::Reset() //重置到默认参数 
 {

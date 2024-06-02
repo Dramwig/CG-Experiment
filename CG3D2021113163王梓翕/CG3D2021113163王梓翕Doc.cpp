@@ -32,6 +32,7 @@
 #include "CG3DTriangle.h"
 #include "CG3DTriangularFan.h"
 #include "CG3DTriangularStrip.h"
+#include "CG3DRubiksCube.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -47,6 +48,28 @@ BEGIN_MESSAGE_MAP(CCG3D2021113163王梓翕Doc, CDocument)
 	ON_UPDATE_COMMAND_UI(ID_PEN_STYLE, &CCG3D2021113163王梓翕Doc::OnUpdatePenStyle)
 	ON_UPDATE_COMMAND_UI(ID_PEN_FILL, &CCG3D2021113163王梓翕Doc::OnUpdatePenFill)
 	ON_UPDATE_COMMAND_UI(ID_ROTATE, &CCG3D2021113163王梓翕Doc::OnUpdateRotate)
+	ON_COMMAND(ID_UP_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnUpRotatePos)
+	ON_COMMAND(ID_UP_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnUpRotateNeg)
+	ON_COMMAND(ID_RIGHT_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnRightRotatePos)
+	ON_COMMAND(ID_RIGHT_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnRightRotateNeg)
+	ON_COMMAND(ID_FRONT_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnFrontRotatePos)
+	ON_COMMAND(ID_FRONT_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnFrontRotateNeg)
+	ON_COMMAND(ID_LEFT_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnLeftRotatePos)
+	ON_COMMAND(ID_LEFT_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnLeftRotateNeg)
+	ON_COMMAND(ID_BACK_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnBackRotatePos)
+	ON_COMMAND(ID_BACK_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnBackRotateNeg)
+	ON_COMMAND(ID_DOWN_ROTATE_POS, &CCG3D2021113163王梓翕Doc::OnDownRotatePos)
+	ON_COMMAND(ID_DOWN_ROTATE_NEG, &CCG3D2021113163王梓翕Doc::OnDownRotateNeg)
+	ON_COMMAND(ID_LEFT_VIEW, &CCG3D2021113163王梓翕Doc::OnLeftView)
+	ON_COMMAND(ID_RIGHT_VIEW, &CCG3D2021113163王梓翕Doc::OnRightView)
+	ON_COMMAND(ID_FRONT_VIEW, &CCG3D2021113163王梓翕Doc::OnFrontView)
+	ON_COMMAND(ID_BACK_VIEW, &CCG3D2021113163王梓翕Doc::OnBackView)
+	ON_COMMAND(ID_CREATE_RubiksCube, &CCG3D2021113163王梓翕Doc::OnCreateRubikscube)
+	ON_COMMAND(ID_DOWN_VIEW, &CCG3D2021113163王梓翕Doc::OnDownView)
+	ON_COMMAND(ID_UP_VIEW, &CCG3D2021113163王梓翕Doc::OnUpView)
+	ON_COMMAND(ID_SUB_VIEW, &CCG3D2021113163王梓翕Doc::OnSubView)
+	ON_COMMAND(ID_WINDOWS_POS, &CCG3D2021113163王梓翕Doc::OnWindowsPos)
+	ON_COMMAND(ID_WINDOWS_NEG, &CCG3D2021113163王梓翕Doc::OnWindowsNeg)
 END_MESSAGE_MAP()
 
 
@@ -62,10 +85,6 @@ CCG3D2021113163王梓翕Doc::CCG3D2021113163王梓翕Doc() noexcept
 	//CG3DCube* cube = new CG3DCube(600);
 	//cube->Rotate(45, 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
 	//mScene->addRenderable(cube);
-	//CG3DTriangularFan* cube = new CG3DTriangularFan();
-	//cube->Rotate(45, 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
-	//mScene->addRenderable(cube);
-
 }
 
 CCG3D2021113163王梓翕Doc::~CCG3D2021113163王梓翕Doc()
@@ -270,4 +289,182 @@ void CCG3D2021113163王梓翕Doc::OnUpdateRotate(CCmdUI* pCmdUI)
 {
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->UpRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->UpRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnRightRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->RightRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnRightRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->RightRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnFrontRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->FrontRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnFrontRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->FrontRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnLeftRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->LeftRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnLeftRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->LeftRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnBackRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->BackRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnBackRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->BackRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnDownRotatePos()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->DownRotate(true);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnDownRotateNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	mRubiksCube->DownRotate(false);
+	UpdateAllViews(nullptr);
+}
+
+void CCG3D2021113163王梓翕Doc::OnCreateRubikscube()
+{
+	// TODO: 在此添加命令处理程序代码
+	/*if(mRubiksCube)
+		delete mRubiksCube;*/
+	mRubiksCube = new CG3DRubiksCube(600);
+	//mRubiksCube->Rotate(20, 1, 1, 1);
+	mScene->addRenderable(mRubiksCube);
+	UpdateAllViews(nullptr);
+}
+
+void CCG3D2021113163王梓翕Doc::OnLeftView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(-1000, 0, 0);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnRightView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(1000, 0, 0);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnFrontView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(0, 0, 1000);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnBackView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(0, 0, -1000);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnDownView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(0, 1000, 0.0001);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnUpView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(0, -1000, 0.0001);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnSubView()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->SetEye(1000/sqrt(3), 1000 / sqrt(3), 1000 / sqrt(3));
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnWindowsPos()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->Zoom(1.25);
+	UpdateAllViews(nullptr);
+}
+
+
+void CCG3D2021113163王梓翕Doc::OnWindowsNeg()
+{
+	// TODO: 在此添加命令处理程序代码
+	defaultCamera()->Zoom(0.8);
+	UpdateAllViews(nullptr);
 }

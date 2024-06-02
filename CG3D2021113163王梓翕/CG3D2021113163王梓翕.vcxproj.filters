@@ -123,6 +123,9 @@
     <ClInclude Include="CInputDialog1.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CG3DRubiksCube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CG3D2021113163王梓翕.cpp">
@@ -219,6 +222,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CInputDialog1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DRubiksCube.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

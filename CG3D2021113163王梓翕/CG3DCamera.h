@@ -50,8 +50,10 @@ public:
 
 	//移动相机 
 	void Move(double tx, double ty, double tz);
+	void SetEye(double x, double y, double z);
 	//观察窗口（左下、右上）调整，保持与视口相同高宽比 
 	void Zoom(const Vec2d& lb, const Vec2d& rt);
+	void Zoom(double r);
 	//重置相机坐标系及近、远截面 
 	void Reset();
 

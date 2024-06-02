@@ -199,6 +199,7 @@
     <ClInclude Include="CG3DQuadStrip.h" />
     <ClInclude Include="CG3DRenderable.h" />
     <ClInclude Include="CG3DRenderContext.h" />
+    <ClInclude Include="CG3DRubiksCube.h" />
     <ClInclude Include="CG3DScene.h" />
     <ClInclude Include="CG3DSceneTreeView.h" />
     <ClInclude Include="CG3DSphere.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="CG3DQuadStrip.cpp" />
     <ClCompile Include="CG3DRenderable.cpp" />
     <ClCompile Include="CG3DRenderContext.cpp" />
+    <ClCompile Include="CG3DRubiksCube.cpp" />
     <ClCompile Include="CG3DScene.cpp" />
     <ClCompile Include="CG3DSceneTreeView.cpp" />
     <ClCompile Include="CG3DSphere.cpp" />

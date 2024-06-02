@@ -44,13 +44,36 @@
 #define ID_REMOVE_ALL                   32784
 #define ID_ROTATE                       32785
 #define ID_SPHERE                       32787
+#define ID_UP_ROTATE_POS                32788
+#define ID_UP_ROTATE_NEG                32789
+#define ID_RIGHT_ROTATE_POS             32790
+#define ID_RIGHT_ROTATE_NEG             32791
+#define ID_FRONT_ROTATE_POS             32792
+#define ID_FRONT_ROTATE_NEG             32793
+#define ID_LEFT_ROTATE_POS              32794
+#define ID_LEFT_ROTATE_NEG              32795
+#define ID_BACK_ROTATE_POS              32796
+#define ID_BACK_ROTATE_NEG              32797
+#define ID_DOWN_ROTATE_POS              32798
+#define ID_DOWN_ROTATE_NEG              32799
+#define ID_LEFT_VIEW                    32800
+#define ID_RIGHT_VIEW                   32801
+#define ID_BACK_VIEW                    32802
+#define ID_FRONT_VIEW                   32804
+#define ID_UP_VIEW                      32805
+#define ID_DOWN_VIEW                    32806
+#define ID_CREATE_RubiksCube            32807
+#define ID_BUTTON3                      32809
+#define ID_WINDOWS_NEG                  32809
+#define ID_SUB_VIEW                     32810
+#define ID_WINDOWS_POS                  32811
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        312
-#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_COMMAND_VALUE         32812
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

@@ -2,10 +2,11 @@
 #define _CG3DCube_H_INCLUDED 
 
 #include "CG3DRenderable.h" 
+#include "AABBox3.h"
 
 class CG3DCube : public CG3DRenderable
 {
-	DECLARE_SERIAL(CG3DCube)
+	DECLARE_SERIAL(CG3DCube) //声明为可序列化类
 public:
 	CG3DCube();
 	CG3DCube(double size); //给定边长 
@@ -15,7 +16,9 @@ public:
 	//序列化 
 	virtual void Serialize(CArchive& ar);
 	//绘制 
+	void Draw(bool outline = false);
 	virtual void Render(CG3DRenderContext* pRC, CG3DCamera* pCamera);
+	void Render(CG3DRenderContext* pRC, CG3DCamera* pCamera, Mat4d pMat);
 
 	//计算包围盒（重写基类虚函数） 
 	virtual void computeBoundingBox();
