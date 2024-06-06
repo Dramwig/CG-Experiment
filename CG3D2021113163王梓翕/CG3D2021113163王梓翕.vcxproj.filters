@@ -126,6 +126,39 @@
     <ClInclude Include="CG3DRubiksCube.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CGRenderState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGColorMaterial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGLight.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGLightModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGPolygonMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGShadeModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CGAppearance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DCone.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CG3DCylinder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputMaterial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputLight.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CG3D2021113163王梓翕.cpp">
@@ -227,6 +260,39 @@
     <ClCompile Include="CG3DRubiksCube.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CGRenderState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGColorMaterial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGLight.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGLightModel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGPolygonMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGShadeModel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CGAppearance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DCone.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CG3DCylinder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputMaterial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputLight.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CG3D2021113163王梓翕.reg" />
@@ -236,6 +302,7 @@
     <None Include="res\CG3D2021113163.rc2">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CG3D2021113163.rc">

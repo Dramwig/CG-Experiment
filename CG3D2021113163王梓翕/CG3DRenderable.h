@@ -4,6 +4,8 @@
 #include "CGObject.h" 
 #include "AABBox3.h" 
 #include "Matrix44.h" 
+#include "CGAppearance.h"
+#include "CGPolygonMode.h"
 
 class CG3DRenderContext;
 class CG3DCamera;
@@ -12,6 +14,9 @@ class CG3DScene;
 class CG3DRenderable : public CGObject
 {
 	DECLARE_SERIAL(CG3DRenderable)
+	//+1
+	//回调函数
+	typedef bool (*CG3DRenderableCallback) (CG3DRenderable*);
 public:
 	CG3DRenderable();
 	CG3DRenderable(const CString& name);
@@ -43,6 +48,7 @@ public:
 	void Translate(double tx, double ty, double tz);   //平移（三维） 
 	void Rotate(double angle, double cx, double cy, double cz); //旋转（三维） 
 	void Scale(double sx, double sy, double sz);    //缩放（三维） 
+	Vec3f getPosition() const {return Vec3f(mMat.e(0, 3), mMat.e(1, 3), mMat.e(2, 3));}
 
 	void setPenColor(COLORREF color) { mPenColor = color; }
 	COLORREF penColor() const { return mPenColor; }
@@ -64,6 +70,31 @@ protected:
 	int mPenStyle = PS_SOLID; //轮廓线型
 	COLORREF mBrushColor = RGB(0, 0, 0); //画刷颜色
 	int mPenFill = 0; //画刷样式
+
+public: //实验7
+	//其他可注册回调 
+	void RegisterCallback(CG3DRenderableCallback callback) { mCallback = callback; }
+	void UnregisterCallback() { mCallback = nullptr; }
+	CG3DRenderableCallback Callback() { return mCallback; }
+
+	//定时回调（通过场景类的TimerCallback调用） 
+	virtual bool TimerCallback();
+	bool TimerCallbackEnabled() const { return mTimerCallbackEnabled; }
+	void EnableTimerCallback(bool e = true) { mTimerCallbackEnabled = e; }
+	//外观属性 
+	CGAppearance& Appearance() { return mAppearance; }
+	//面绘制模式：点、线、面 
+	CGPolygonMode& PolygonMode() { return mPolygonMode; }
+protected:
+	//默认情况下，时间回调不起作用，需要在动态对象中启用 
+	bool mTimerCallbackEnabled = false;
+	//其他回调 
+	CG3DRenderableCallback mCallback = nullptr;
+	//外观属性 
+	CGAppearance mAppearance;
+	//面绘制模式：点、线、面 
+	CGPolygonMode mPolygonMode;
+
 };
 
 #endif //_CG3DRenderable_H_INCLUDED

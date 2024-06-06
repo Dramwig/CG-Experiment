@@ -63,6 +63,9 @@ public:
 	int Rotate() const;
 	void ShowPrompt(const CString& str);
 	void ShowCoordOnStatusBar(const CString& str);
+public: //实验7
+	COLORREF MaterialColor() const;
+	int MaterialStyle() const;
 };
 
 

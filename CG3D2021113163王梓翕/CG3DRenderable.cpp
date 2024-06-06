@@ -79,3 +79,11 @@ void CG3DRenderable::Scale(double sx, double sy, double sz) //缩放（三维）
 	mMat.preMultiply(Mat4d::getScaling(sx, sy, sz));
 	setBoundsDirty(true);
 }
+
+bool CG3DRenderable::TimerCallback()
+{
+	if (mAppearance.Material().Callback() != nullptr) //调用材质回调 
+		return mAppearance.Material().Callback()(&mAppearance.Material());
+
+	return false;
+}

@@ -19,10 +19,13 @@
 #include "CG3DRenderContext.h" 
 #include "CG3DRenderable.h" 
 #include "CG3DRubiksCube.h"
-
+#include "CG3DSphere.h"
+#include "CG3DCone.h"
+#include "CG3DCylinder.h"
 
 class CCG3D2021113163王梓翕Doc : public CDocument
 {
+	friend class CCG3D2021113163王梓翕View;
 protected: // 仅从序列化创建
 	CCG3D2021113163王梓翕Doc() noexcept;
 	DECLARE_DYNCREATE(CCG3D2021113163王梓翕Doc)
@@ -64,6 +67,12 @@ protected:
 public:
 	CG3DScene* scene() { return mScene; }
 	CG3DCamera* defaultCamera() { return mCameras.GetAt(0); }
+	CG3DSphere* sphere = nullptr;
+	CG3DCone* cone = nullptr;
+	CG3DCylinder* cylinder = nullptr;
+	CGLight* mLight = nullptr, * mLight2 = nullptr;
+	Vec4f mLightRBG;
+	int mLightMark;
 private:
 	CG3DScene* mScene;  //场景 
 	CG3DRubiksCube* mRubiksCube= nullptr; //魔方
@@ -103,4 +112,14 @@ public:
 	afx_msg void OnSubView();
 	afx_msg void OnWindowsPos();
 	afx_msg void OnWindowsNeg();
+	afx_msg void OnInitScene();
+	afx_msg void OnRemoveLastLight();
+	afx_msg void OnRemoveAllLight();
+	afx_msg void OnInitLight();
+	afx_msg void OnUpdateMaterialColor(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateBaseMaterial(CCmdUI* pCmdUI);
+public:
+	//动画定时回调（如果场景有更新需要重绘则返回true） 
+	bool TimerCallback();
+	afx_msg void Onanime1();
 };

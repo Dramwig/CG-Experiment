@@ -33,6 +33,9 @@
 #include "CG3DTriangularFan.h"
 #include "CG3DTriangularStrip.h"
 #include "CG3DRubiksCube.h"
+#include "CG3DSphere.h"
+#include "CG3DCone.h"
+#include "CG3DCylinder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -70,8 +73,31 @@ BEGIN_MESSAGE_MAP(CCG3D2021113163王梓翕Doc, CDocument)
 	ON_COMMAND(ID_SUB_VIEW, &CCG3D2021113163王梓翕Doc::OnSubView)
 	ON_COMMAND(ID_WINDOWS_POS, &CCG3D2021113163王梓翕Doc::OnWindowsPos)
 	ON_COMMAND(ID_WINDOWS_NEG, &CCG3D2021113163王梓翕Doc::OnWindowsNeg)
+	ON_COMMAND(ID_INIT_SCENE, &CCG3D2021113163王梓翕Doc::OnInitScene)
+	ON_COMMAND(ID_REMOVE_LAST_LIGHT, &CCG3D2021113163王梓翕Doc::OnRemoveLastLight)
+	ON_COMMAND(ID_REMOVE_ALL_LIGHT, &CCG3D2021113163王梓翕Doc::OnRemoveAllLight)
+	ON_COMMAND(ID_INIT_LIGHT, &CCG3D2021113163王梓翕Doc::OnInitLight)
+	ON_UPDATE_COMMAND_UI(ID_MATERIAL_COLOR, &CCG3D2021113163王梓翕Doc::OnUpdateMaterialColor)
+	ON_UPDATE_COMMAND_UI(ID_BASE_MATERIAL, &CCG3D2021113163王梓翕Doc::OnUpdateBaseMaterial)
+	ON_COMMAND(ID_anime1, &CCG3D2021113163王梓翕Doc::Onanime1)
 END_MESSAGE_MAP()
 
+
+bool Light0CallBack(CGRenderState* pRS)
+{
+	if (pRS != nullptr && pRS->IsKindOf(RUNTIME_CLASS(CGLight)))
+	{
+		//此处对pRS光源进行相关操作，如改变位置、颜色等效果。 
+		CGLight* plight = dynamic_cast<CGLight*>(pRS);
+		if (plight != nullptr)
+		{
+			//光源属性操作，实现光源动画 
+
+			return true;
+		}
+	}
+	return false;
+}
 
 // CCG3D2021113163王梓翕Doc 构造/析构
 
@@ -85,6 +111,7 @@ CCG3D2021113163王梓翕Doc::CCG3D2021113163王梓翕Doc() noexcept
 	//CG3DCube* cube = new CG3DCube(600);
 	//cube->Rotate(45, 1, 1, 1); //绕直线(0,0,0)(1,1,1)旋转45度便于观察 
 	//mScene->addRenderable(cube);
+
 }
 
 CCG3D2021113163王梓翕Doc::~CCG3D2021113163王梓翕Doc()
@@ -238,6 +265,12 @@ bool CCG3D2021113163王梓翕Doc::RenderScene(CG3DRenderContext * pRC)
 	pCamera->SetClientHeight(h);
 	pCamera->viewport().set(0, 0, w, h);
 
+	//+ 
+	pRC->Lighting(true);
+	pRC->Shading(true);
+	pCamera->SetProjectionMode(0);
+	//pCamera->SetProjectionMode(0); //透视投影（要修改相机的左右下上及近平面）
+
 	pRC->Ready(pCamera);
 	bool ret = mScene->Render(pRC, pCamera);
 	pRC->Finish(pCamera);
@@ -249,144 +282,106 @@ void CCG3D2021113163王梓翕Doc::OnUpdatePenColor(CCmdUI* pCmdUI)
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpdatePenWidth(CCmdUI* pCmdUI)
 {
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpdatePenStyle(CCmdUI* pCmdUI)
 {
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpdatePenFill(CCmdUI* pCmdUI)
 {
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
 }
-
-
 void CCG3D2021113163王梓翕Doc::AddRenderable(CG3DRenderable* R) {
 	mScene->addRenderable(R);
 }
-
-
-
 void CCG3D2021113163王梓翕Doc::RemoveAll()
 {
 	// TODO: 在此添加命令处理程序代码
 	mScene->removeAllRenderable();
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpdateRotate(CCmdUI* pCmdUI)
 {
 	// TODO: 在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(true);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->UpRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->UpRotate(false);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnRightRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->RightRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnRightRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->RightRotate(false);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnFrontRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->FrontRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnFrontRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->FrontRotate(false);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnLeftRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->LeftRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnLeftRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->LeftRotate(false);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnBackRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->BackRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnBackRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->BackRotate(false);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnDownRotatePos()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->DownRotate(true);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnDownRotateNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	mRubiksCube->DownRotate(false);
 	UpdateAllViews(nullptr);
 }
-
 void CCG3D2021113163王梓翕Doc::OnCreateRubikscube()
 {
 	// TODO: 在此添加命令处理程序代码
@@ -397,74 +392,188 @@ void CCG3D2021113163王梓翕Doc::OnCreateRubikscube()
 	mScene->addRenderable(mRubiksCube);
 	UpdateAllViews(nullptr);
 }
-
 void CCG3D2021113163王梓翕Doc::OnLeftView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(-1000, 0, 0);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnRightView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(1000, 0, 0);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnFrontView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(0, 0, 1000);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnBackView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(0, 0, -1000);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnDownView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(0, 1000, 0.0001);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnUpView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(0, -1000, 0.0001);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnSubView()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->SetEye(1000/sqrt(3), 1000 / sqrt(3), 1000 / sqrt(3));
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnWindowsPos()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->Zoom(1.25);
 	UpdateAllViews(nullptr);
 }
-
-
 void CCG3D2021113163王梓翕Doc::OnWindowsNeg()
 {
 	// TODO: 在此添加命令处理程序代码
 	defaultCamera()->Zoom(0.8);
+	UpdateAllViews(nullptr);
+}
+void CCG3D2021113163王梓翕Doc::OnInitScene()
+{
+	// TODO: 在此添加命令处理程序代码
+	RemoveAll();
+	//球体 
+	sphere = new CG3DSphere(4);
+	sphere->Translate(-10, 0, 0);
+	mScene->addRenderable(sphere);
+	//sphere->Appearance().Material().setColorMaterialEnabled(true);
+	sphere->Appearance().Material().setMetallicMaterial();
+	//sphere->Appearance().Material().setFlatColor(Vec4f(0.9f, 0.1f, 0.1f, 1.0f));
+	sphere->PolygonMode().setFrontFace(EPolygonMode::PM_FILL);
+
+	cone = new CG3DCone(4, 8);
+	cone->Rotate(-90, 1, 0, 0);
+	cone->Translate(0, -4, 0);
+	mScene->addRenderable(cone);
+	//cone->Appearance().Material().setColorMaterialEnabled(true);
+	cone->Appearance().Material().setPlasticMaterial();
+	//cone->Appearance().Material().setFlatColor(Vec4f(0.1f, 0.9f, 0.1f, 1.0f));
+	cone->PolygonMode().setFrontFace(EPolygonMode::PM_FILL);
+
+	cylinder = new CG3DCylinder(4, 8);
+	cylinder->Rotate(-90, 1, 0, 0);
+	cylinder->Translate(10, -4, 0);
+	mScene->addRenderable(cylinder);
+	//sphere->Appearance().Material().setColorMaterialEnabled(true);
+	cylinder->Appearance().Material().setGlassMaterial();
+	//cylinder->Appearance().Material().setFlatColor(Vec4f(0.0f, 0.1f, 0.9f, 1.0f));
+	cylinder->PolygonMode().setFrontFace(EPolygonMode::PM_FILL);
+	UpdateAllViews(nullptr);
+}
+void CCG3D2021113163王梓翕Doc::OnInitLight()
+{
+	// TODO: 在此添加命令处理程序代码
+	// 光源
+	CGLight* light0 = new CGLight();
+	light0->setAsPointLight();
+	mScene->AddLight(light0);
+	UpdateAllViews(nullptr);
+}
+void CCG3D2021113163王梓翕Doc::OnRemoveLastLight()
+{
+	// TODO: 在此添加命令处理程序代码
+	//AfxMessageBox(_T("1！"), MB_OK | MB_ICONINFORMATION);
+	mScene->RemoveLastLight();
+	//mScene->TimerCallback();
+	UpdateAllViews(nullptr);
+}
+void CCG3D2021113163王梓翕Doc::OnRemoveAllLight()
+{
+	// TODO: 在此添加命令处理程序代码
+	//AfxMessageBox(_T("2！"), MB_OK | MB_ICONINFORMATION);
+	mScene->RemoveAllLights();
+	UpdateAllViews(nullptr);
+}
+void CCG3D2021113163王梓翕Doc::OnUpdateMaterialColor(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+void CCG3D2021113163王梓翕Doc::OnUpdateBaseMaterial(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(true);
+}
+
+//动画定时回调（如果场景有更新需要重绘则返回true） 
+bool CCG3D2021113163王梓翕Doc::TimerCallback()
+{
+	if (cone) {
+		cone->Rotate(1, 0, 1, 0);
+		Vec3f a = cone->getPosition();
+		mLight2->setPosition(cone->getPosition());
+	}
+	else
+		return false;
+	if (mLight) {
+		int last = (mLightMark + 1) % 3;
+		mLightRBG[mLightMark] += 0.1f;
+		mLightRBG[last] -= 0.1f;
+		if (mLightRBG[mLightMark] >= 1) {
+			mLightRBG[mLightMark] = 1;
+			mLightRBG[last] = 0;
+			mLightMark = (mLightMark + 1) % 3;
+		}
+		mLight->setDiffuse(mLightRBG);
+	}
+	else
+		return false;
+	//return mScene->TimerCallback();
+	
+	return true;
+}
+
+void CCG3D2021113163王梓翕Doc::Onanime1()
+{
+	// TODO: 在此添加命令处理程序代码
+	// TODO: 在此添加命令处理程序代码
+	RemoveAll();
+	OnRemoveAllLight();
+	//球体 
+	sphere = new CG3DSphere(4);
+	sphere->Translate(0, 0, 0);
+	mScene->addRenderable(sphere);
+	sphere->Appearance().Material().setMetallicMaterial();
+	sphere->PolygonMode().setFrontFace(EPolygonMode::PM_FILL);
+
+	cone = new CG3DCone(4, 8);
+	cone->Rotate(-90, 1, 0, 0);
+	cone->Translate(10, -4, 0);
+	mScene->addRenderable(cone);
+	cone->Appearance().Material().setPlasticMaterial();
+	cone->PolygonMode().setFrontFace(EPolygonMode::PM_FILL);
+
+	mLight = new CGLight();
+	mLight->setAsSpotLight();
+	mLight->setPosition(Vec3f(0, 10, 0));
+	mLight->setSpotlightParameters(Vec3f(0, -1, 0), 5, 55);
+	mLight->setDiffuse(Vec4f(1, 1, 0, 1));
+	mLightRBG = Vec4f(1.0f, 1.0f, 0.0f, 1.0f);
+	mLightMark = 2;
+	mScene->AddLight(mLight);
+
+	mLight2 = new CGLight();
+	mLight2->setAsPointLight();
+	mLight2->setPosition(Vec3f(10, -4, 0));
+	mScene->AddLight(mLight2);
+
 	UpdateAllViews(nullptr);
 }

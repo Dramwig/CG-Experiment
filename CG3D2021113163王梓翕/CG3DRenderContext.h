@@ -1,6 +1,8 @@
 #ifndef _CG3DRenderContext_H_INCLUDED 
 #define _CG3DRenderContext_H_INCLUDED 
 
+#include "CGRenderState.h"
+
 class CG3DCamera;
 class CG3DRenderContext
 {
@@ -25,6 +27,19 @@ protected:
 	HDC  mHDC = 0;  //通过派生类设置 
 	HGLRC mHGLRC = 0; //通过派生类设置 
 	HPALETTE mPalette = 0; //OpenGL调色板 
+public: //实验7
+	//开关变量 
+	bool Enable(EEnable capability);
+	bool Disable(EEnable capability);
+	//辅助函数 
+	bool IsShading() { return bShading; }
+	bool IsLighting();
+	void Shading(bool shading);
+	void Lighting(bool lighting);
+protected:
+	//光照材质 
+	bool bShading = false; //是否使用材质属性 
+	bool bLighting = false; //是否启用光照功能
 };
 
 #endif //_CG3DRenderContext_H_INCLUDED

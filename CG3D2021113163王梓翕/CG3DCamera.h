@@ -67,11 +67,11 @@ protected:
 	int mProjectionMode = 0;
 	//视图客户区矩形 
 	//观察空间（在观察坐标系中定义）矩形的左、右、下、上 
-	double mLeft = -1000.0;
-	double mBottom = -1000.0;
-	double mRight = 1000.0;
-	double mTop = 1000.0;
-	double mNear = 0.0;   //近截面 
+	double mLeft = -10.0;
+	double mBottom = -10.0;
+	double mRight = 10.0;
+	double mTop = 10.0;
+	double mNear = 1.0;   //近截面 
 	double mFar = 100000.0;  //远截面 
 	//相机位置，表示观察坐标系原点的在世界坐标系中的位置 
 	double mEyeX = 0.0;

@@ -96,10 +96,18 @@ public:
     const T& y() const { return elements[1]; }
     const T& z() const { return elements[2]; }
     const T& w() const { return elements[3]; }
+    const T& r() const { return elements[0]; }
+    const T& g() const { return elements[1]; }
+    const T& b() const { return elements[2]; }
+    const T& a() const { return elements[3]; }
     T& x() { return elements[0]; }
     T& y() { return elements[1]; }
     T& z() { return elements[2]; }
     T& w() { return elements[3]; }
+    T& r() { return elements[0]; }
+    T& g() { return elements[1]; }
+    T& b() { return elements[2]; }
+    T& a() { return elements[3]; }
 
     // 返回前两个元素形成的Vector3
     Vector3<T> xyz() const { return Vector3<T>(x(), y(), z()); }

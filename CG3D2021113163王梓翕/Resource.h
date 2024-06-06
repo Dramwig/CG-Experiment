@@ -24,9 +24,35 @@
 #define IDR_RIBBON                      307
 #define IDD_DIALOG1                     310
 #define IDC_INPUT_VALUE1                310
+#define IDD_INPUT_MATERIAL              312
+#define IDD_INPUT_LIGHT                 314
 #define IDC_EDIT1                       1000
 #define IDC_EDIT2                       1001
 #define IDC_EDIT3                       1002
+#define IDC_Sr                          1003
+#define IDC_Er                          1004
+#define IDC_Shin                        1005
+#define IDC_Dg                          1006
+#define IDC_Ag                          1007
+#define IDC_Sg                          1008
+#define IDC_Eg                          1009
+#define IDC_Db                          1010
+#define IDC_Ab                          1011
+#define IDC_Sb                          1012
+#define IDC_Eb                          1013
+#define IDC_Ar                          1014
+#define IDC_Dr                          1015
+#define IDC_Dy                          1016
+#define IDC_Pz                          1017
+#define IDC_At1                         1018
+#define IDC_At3                         1019
+#define IDC_At2                         1020
+#define IDC_SpotCutoff                  1022
+#define IDC_SpotExp                     1024
+#define IDC_Px                          1025
+#define IDC_Py                          1026
+#define IDC_Dx                          1027
+#define IDC_Dz                          1028
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_PEN_WIDTH                    32771
 #define ID_PEN_STYLE                    32772
@@ -47,6 +73,7 @@
 #define ID_UP_ROTATE_POS                32788
 #define ID_UP_ROTATE_NEG                32789
 #define ID_RIGHT_ROTATE_POS             32790
+#define ID_LIGHT_REMOVE_LAST            32790
 #define ID_RIGHT_ROTATE_NEG             32791
 #define ID_FRONT_ROTATE_POS             32792
 #define ID_FRONT_ROTATE_NEG             32793
@@ -63,18 +90,31 @@
 #define ID_UP_VIEW                      32805
 #define ID_DOWN_VIEW                    32806
 #define ID_CREATE_RubiksCube            32807
-#define ID_BUTTON3                      32809
+#define ID_REMOVE_LAST_LIGHT            32808
 #define ID_WINDOWS_NEG                  32809
 #define ID_SUB_VIEW                     32810
 #define ID_WINDOWS_POS                  32811
+#define ID_INIT_SCENE                   32812
+#define ID_REMOVE_ALL_LIGHT             32813
+#define ID_INIT_LIGHT                   32814
+#define ID_Custom_point_light_sources   32815
+#define ID_Custom_Spotlight             32817
+#define ID_Custom_line_light_source     32818
+#define ID_MATERIAL_COLOR               32819
+#define ID_BASE_MATERIAL                32820
+#define ID_UPDATE_MATERIAL              32821
+#define ID_Custom_Materials             32822
+#define ID_NTN_TIMER1                   32823
+#define ID_BUTTON3                      32824
+#define ID_anime1                       32824
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        312
-#define _APS_NEXT_COMMAND_VALUE         32812
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_RESOURCE_VALUE        316
+#define _APS_NEXT_COMMAND_VALUE         32825
+#define _APS_NEXT_CONTROL_VALUE         1029
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

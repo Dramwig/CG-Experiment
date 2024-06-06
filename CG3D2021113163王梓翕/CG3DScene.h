@@ -2,6 +2,9 @@
 #define _CG3DScene_H_INCLUDED 
 #include "CGObject.h" 
 #include "AABBox3.h" 
+#include "CGLightModel.h"
+#include "CGLight.h"
+#include "CGShadeModel.h"
 //使用到如下类的指针，进行类预声明 
 class CG3DRenderable;
 class CG3DCamera;
@@ -30,6 +33,27 @@ public:
 protected:
 	//图形对象列表 
 	CTypedPtrArray<CObArray, CG3DRenderable*> mRenderables;
+
+public: //实验7
+	//定时回调 
+	bool TimerCallback();
+	//光源 
+	bool AddLight(CGLight* light);
+	bool deleteLight(int index);
+	void RemoveLastLight();
+	void RemoveAllLights();
+
+	CGLightModel& LightModel() { return mLightModel; }
+	CGShadeModel& ShadeModel() { return mShadeModel; }
+	const CGLightModel& LightModel() const { return mLightModel; }
+	const CGShadeModel& ShadeModel() const { return mShadeModel; }
+
+protected:
+	//光源 
+	CTypedPtrArray<CObArray, CGLight*> mLights;
+	//光照及着色模式 
+	CGLightModel mLightModel;
+	CGShadeModel mShadeModel;
 };
 
 #endif //_CG3DScene_H_INCLUDED 

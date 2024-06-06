@@ -191,7 +191,9 @@
     <ClInclude Include="CG3D2021113163王梓翕View.h" />
     <ClInclude Include="CG3DCamera.h" />
     <ClInclude Include="CG3DClosedFoldedLine.h" />
+    <ClInclude Include="CG3DCone.h" />
     <ClInclude Include="CG3DCube.h" />
+    <ClInclude Include="CG3DCylinder.h" />
     <ClInclude Include="CG3DFoldedLine.h" />
     <ClInclude Include="CG3DLineSegment.h" />
     <ClInclude Include="CG3DPolygon.h" />
@@ -206,9 +208,18 @@
     <ClInclude Include="CG3DTriangle.h" />
     <ClInclude Include="CG3DTriangularFan.h" />
     <ClInclude Include="CG3DTriangularStrip.h" />
+    <ClInclude Include="CGAppearance.h" />
     <ClInclude Include="CGBase.h" />
+    <ClInclude Include="CGColorMaterial.h" />
+    <ClInclude Include="CGLight.h" />
+    <ClInclude Include="CGLightModel.h" />
     <ClInclude Include="CGObject.h" />
+    <ClInclude Include="CGPolygonMode.h" />
+    <ClInclude Include="CGRenderState.h" />
+    <ClInclude Include="CGShadeModel.h" />
     <ClInclude Include="CInputDialog1.h" />
+    <ClInclude Include="CInputLight.h" />
+    <ClInclude Include="CInputMaterial.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Matrix22.h" />
@@ -230,7 +241,9 @@
     <ClCompile Include="CG3D2021113163王梓翕View.cpp" />
     <ClCompile Include="CG3DCamera.cpp" />
     <ClCompile Include="CG3DClosedFoldedLine.cpp" />
+    <ClCompile Include="CG3DCone.cpp" />
     <ClCompile Include="CG3DCube.cpp" />
+    <ClCompile Include="CG3DCylinder.cpp" />
     <ClCompile Include="CG3DFoldedLine.cpp" />
     <ClCompile Include="CG3DLineSegment.cpp" />
     <ClCompile Include="CG3DPolygon.cpp" />
@@ -245,8 +258,17 @@
     <ClCompile Include="CG3DTriangle.cpp" />
     <ClCompile Include="CG3DTriangularFan.cpp" />
     <ClCompile Include="CG3DTriangularStrip.cpp" />
+    <ClCompile Include="CGAppearance.cpp" />
+    <ClCompile Include="CGColorMaterial.cpp" />
+    <ClCompile Include="CGLight.cpp" />
+    <ClCompile Include="CGLightModel.cpp" />
     <ClCompile Include="CGObject.cpp" />
+    <ClCompile Include="CGPolygonMode.cpp" />
+    <ClCompile Include="CGRenderState.cpp" />
+    <ClCompile Include="CGShadeModel.cpp" />
     <ClCompile Include="CInputDialog1.cpp" />
+    <ClCompile Include="CInputLight.cpp" />
+    <ClCompile Include="CInputMaterial.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Matrix22.cpp" />
     <ClCompile Include="Matrix33.cpp" />
@@ -263,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CG3D2021113163王梓翕.reg" />
+    <None Include="ClassDiagram.cd" />
     <None Include="res\CG3D2021113163.rc2" />
     <None Include="res\ribbon.mfcribbon-ms" />
   </ItemGroup>

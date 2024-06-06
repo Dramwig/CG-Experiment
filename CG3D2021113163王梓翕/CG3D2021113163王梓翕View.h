@@ -14,7 +14,7 @@
 
 #pragma once
 #include "CG3DRenderContext.h"
-
+#include "CGLight.h"
 
 class CCG3D2021113163王梓翕View : public CView, public CG3DRenderContext
 {
@@ -86,6 +86,22 @@ public:
 	afx_msg void OnQuadstrip();
 	afx_msg void OnRemoveAll();
 	afx_msg void OnSphere();
+public://实验7
+	COLORREF MaterialColor() const;
+	int MaterialStyle() const;
+	afx_msg void OnUpdateMaterial();
+	afx_msg void OnCustomMaterials();
+	afx_msg void OnCustompointlightsources();
+	afx_msg void OnCustomlinelightsource();
+	afx_msg void OnCustomSpotlight();
+	CGLight* CustomLight();
+	afx_msg void OnNtnTimer1();
+	afx_msg void OnUpdateNtnTimer1(CCmdUI* pCmdUI);
+protected:
+	UINT_PTR mAnimateTimer = 0;
+	//动画定时器
+public:
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // CG3D2021113163王梓翕View.cpp 中的调试版本

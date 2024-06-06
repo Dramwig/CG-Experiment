@@ -180,3 +180,20 @@ void CMainFrame::ShowCoordOnStatusBar(const CString& str)
 	m_wndStatusBar.Invalidate();
 	m_wndStatusBar.UpdateWindow();
 }
+
+COLORREF CMainFrame::MaterialColor() const
+{
+	CMFCRibbonColorButton* pPenColor =
+		(CMFCRibbonColorButton*)m_wndRibbonBar.FindByID(ID_MATERIAL_COLOR);
+	if (pPenColor)
+		return pPenColor->GetColor();
+	return RGB(1, 1, 1);
+}
+
+int CMainFrame::MaterialStyle() const
+{
+	CMFCRibbonComboBox* pPenStyle = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_BASE_MATERIAL);
+	if (pPenStyle)
+		return pPenStyle->GetCurSel();
+	return 0;
+}
