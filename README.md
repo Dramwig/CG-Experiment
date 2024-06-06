@@ -6,13 +6,18 @@
 
 本项目是一个计算机图形学实验，专注于二维图形和三维图像的生成与处理，基于Microsoft Foundation Classes (MFC) 和 OpenGL。项目旨在提供一个实验平台，用于学习和探索图形生成的基础理论和实践应用。
 
+<img src="fig/1.gif" style="zoom:20%;" />
+
 ## 主要功能
 
 <div style="display: inline-block;">
-  <img src="fig/1.gif" alt="Image" align="right" width="300px" />
+  <img src="fig/4.png" alt="Image" align="right" width="200px" />
 </div>
 
-- 二维图形的绘制与操作
+- 二维图形的交互式绘制与操作
+- 二维图形的变换和裁剪
+- 三维图形的空间变换
+- 三维3阶魔方交互式操作
 - 三维图像的生成和渲染
 - 光照、纹理和材质的应用
 - 图形和图像的交互式编辑
