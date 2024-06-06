@@ -6,7 +6,7 @@
 
 本项目是一个计算机图形学实验，专注于二维图形和三维图像的生成与处理，基于Microsoft Foundation Classes (MFC) 和 OpenGL。项目旨在提供一个实验平台，用于学习和探索图形生成的基础理论和实践应用。
 
-<img src="fig/1.gif" style="display: block; margin-left: auto; margin-right: auto;zoom:20%;" />
+<img src="fig/1.gif" class="center" style="display: block; margin-left: auto; margin-right: auto;zoom:20%;" />
 
 
 ## 主要功能
