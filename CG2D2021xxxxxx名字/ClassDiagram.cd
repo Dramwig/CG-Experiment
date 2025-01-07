@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="44.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CG2D2021xxxxxx名字.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AABBox2&lt;T&gt;" Collapsed="true">
+    <Position X="3.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIBBAAAFoAAQAQAgAAQAADAAAAAAIAgAgiAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DCircleCenterRadiusCreateCommand" Collapsed="true">
+    <Position X="15.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAQAAAAAAAAgAAAAAAARAAAAEAAAAAAAAQAAg=</HashCode>
+      <FileName>CG2DCircleCenterRadiusCreateCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCG2D2021xxxxxx名字App" Collapsed="true">
+    <Position X="46.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAEAAAAAAAABAAAAAAQAAAARAAACAAA=</HashCode>
+      <FileName>CG2D2021xxxxxx名字.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCG2D2021xxxxxx名字Doc" Collapsed="true">
+    <Position X="48.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAACgI4AAABAgFCAMAgIUokSg0BRAoAUAEQCIFAAE=</HashCode>
+      <FileName>CG2D2021xxxxxx名字Doc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCG2D2021xxxxxx名字View" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IDBZAG8YCBGMDEmBD5BggSBEghoIAIAwqAzBECwcSBk=</HashCode>
+      <FileName>CG2D2021xxxxxx名字View.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DArc" Collapsed="true">
+    <Position X="31" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAEAAABAAAAAAECAAAAAAAAACAACAAAAJAAAAAAAAA=</HashCode>
+      <FileName>CG2DArc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DCamera" Collapsed="true">
+    <Position X="24.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AxRAAAAACEAEBAAABAAxAAAAACQYAAIADACAAAAAAUA=</HashCode>
+      <FileName>CG2DCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DCircle" Collapsed="true">
+    <Position X="35.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAACCAAAAAAAAACAACAAAABAAAAAIAAA=</HashCode>
+      <FileName>CG2DCircle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DEllipse" Collapsed="true">
+    <Position X="37.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAACAAAAQAAAACAAEAAAABAAAEAAAAA=</HashCode>
+      <FileName>CG2DEllipse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DLine" Collapsed="true">
+    <Position X="40" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAABAAAAACAAAAAAAAACAAAAAAABAAAAAAACA=</HashCode>
+      <FileName>CG2DLine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DLineSegment" Collapsed="true">
+    <Position X="42.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBAAAAAAAAAAAACAAAAAEAAACAAAAAAABAgAAAAACA=</HashCode>
+      <FileName>CG2DLineSegment.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DLineSegmentCreateCommand" Collapsed="true">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAQAAAAAAAAAAAAAAAABAAAEEACAAAAAAQACA=</HashCode>
+      <FileName>CG2DLineSegmentCreateCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DPolygon" Collapsed="true">
+    <Position X="26.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABEAAAAAAAACAIAAAIACACRAAAACABAAAAAAACA=</HashCode>
+      <FileName>CG2DPolygon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DPolygonCreateCommand" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgEAQAAQAAAAAAAAAAAEABAAAAEAAAAAAAAQAAA=</HashCode>
+      <FileName>CG2DPolygonCreateCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DPolyline" Collapsed="true">
+    <Position X="28.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABEAAAAAAAACAIAAAIBCACABAAACABAAAAAAACA=</HashCode>
+      <FileName>CG2DPolyline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DPolylineCreateCommand" Collapsed="true">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAQAAQAAIAAAIAAAAAABAAAAEAAAAAAAAQAAA=</HashCode>
+      <FileName>CG2DPolylineCreateCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRay" Collapsed="true">
+    <Position X="33.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAgAAAAACAAAAAAAhACAAAAACA=</HashCode>
+      <FileName>CG2DRay.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRenderable" Collapsed="true">
+    <Position X="34.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAQAAIgAAkCQgAgDCAcDAIYAkCgABEggNRAkESIBAAk=</HashCode>
+      <FileName>CG2DRenderable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRenderableMoveCommand" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAACAAAAAAABAAAgARAIAAEAAAAAAAAQAAA=</HashCode>
+      <FileName>CG2DRenderableMoveCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRenderablePickCommand" Collapsed="true">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAQBABAAAAEAAAAAAAAQAAA=</HashCode>
+      <FileName>CG2DRenderablePickCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRenderablePickInBoxCommand" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAABAABCAhAIAAEAAAAAAAAQAAQ=</HashCode>
+      <FileName>CG2DRenderablePickInBoxCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DRenderContext" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAIAGACCAAgAYEABxBBAAQAAAAAIAABCAEJAAAAYBg=</HashCode>
+      <FileName>CG2DRenderContext.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DScene" Collapsed="true">
+    <Position X="19.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAACgIACAAAAgACAOAIAQIkCAABAAgARgEAEYJAAM=</HashCode>
+      <FileName>CG2DScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CG2DViewPort" Collapsed="true">
+    <Position X="22" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAFAgAAIAABBQAQAQGIIEACCAICBAAABBgCAAAACI=</HashCode>
+      <FileName>CG2DViewPort.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Radian" Collapsed="true">
+    <Position X="44.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAEECAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Degree" Collapsed="true">
+    <Position X="53.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAQAAAEACAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGObject" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAQAACAAAAAAAAgIAAAAEAA=</HashCode>
+      <FileName>CGObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSceneTreeView" Collapsed="true">
+    <Position X="51.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAABGAAAgAAAgAAAQAAAAAgAAAEAgAA=</HashCode>
+      <FileName>CSceneTreeView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainFrame" Collapsed="true">
+    <Position X="50" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAFIACAAAAAQACAAQiQAAgCmABgAgCAQAAAQAQJk=</HashCode>
+      <FileName>MainFrm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Matrix22&lt;T&gt;" Collapsed="true">
+    <Position X="17.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAQAAAAAAAIAQAAAAAAAACAAgAAAAAAAA=</HashCode>
+      <FileName>Matrix22.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Matrix33&lt;T&gt;" Collapsed="true">
+    <Position X="10.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CkIGoMAABBBAQDAAUgMWQwQGKQEACEQSDAkgCOEEBSA=</HashCode>
+      <FileName>Matrix33.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIEventListener" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAYACAAACAAAAAAABUCBIAAAECAAAAAAAYAAA=</HashCode>
+      <FileName>UIEventListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector2&lt;T&gt;" Collapsed="true">
+    <Position X="15" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIAACAIAgRADAAAkIIEQAAAAEBAMQAAABwCAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector3&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAACAIIgQALQAAkIIEQAAAAEBAOQAAABwCQAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="ABox2i" Collapsed="true">
+    <Position X="0.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ABox2f" Collapsed="true">
+    <Position X="0.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ABox2d" Collapsed="true">
+    <Position X="6.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ABox2" Collapsed="true">
+    <Position X="6.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Recti" Collapsed="true">
+    <Position X="0.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Rectf" Collapsed="true">
+    <Position X="3.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Rectd" Collapsed="true">
+    <Position X="3.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AABBox2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Int8" Collapsed="true">
+    <Position X="50" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Int16" Collapsed="true">
+    <Position X="44.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Int32" Collapsed="true">
+    <Position X="46.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Int64" Collapsed="true">
+    <Position X="48.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UInt8" Collapsed="true">
+    <Position X="53.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UInt16" Collapsed="true">
+    <Position X="48.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UInt32" Collapsed="true">
+    <Position X="50" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UInt64" Collapsed="true">
+    <Position X="51.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Real32" Collapsed="true">
+    <Position X="44.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Real64" Collapsed="true">
+    <Position X="46.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CGBase.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat2i" Collapsed="true">
+    <Position X="14.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix22.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat2f" Collapsed="true">
+    <Position X="20.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix22.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat2d" Collapsed="true">
+    <Position X="17.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix22.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat2" Collapsed="true">
+    <Position X="17.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix22.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat3i" Collapsed="true">
+    <Position X="13.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix33.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat3f" Collapsed="true">
+    <Position X="9.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix33.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat3d" Collapsed="true">
+    <Position X="10.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix33.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Mat3" Collapsed="true">
+    <Position X="10.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matrix33.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2i" Collapsed="true">
+    <Position X="18" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2u" Collapsed="true">
+    <Position X="12" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2f" Collapsed="true">
+    <Position X="15" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2d" Collapsed="true">
+    <Position X="18" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2" Collapsed="true">
+    <Position X="21" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2i" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2u" Collapsed="true">
+    <Position X="18" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2f" Collapsed="true">
+    <Position X="15" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2d" Collapsed="true">
+    <Position X="15" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2" Collapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2iArray" Collapsed="true">
+    <Position X="48.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2uArray" Collapsed="true">
+    <Position X="50" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2fArray" Collapsed="true">
+    <Position X="46.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2dArray" Collapsed="true">
+    <Position X="44.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2iArray" Collapsed="true">
+    <Position X="44.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2uArray" Collapsed="true">
+    <Position X="46.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2fArray" Collapsed="true">
+    <Position X="53.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos2dArray" Collapsed="true">
+    <Position X="51.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3i" Collapsed="true">
+    <Position X="7" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3u" Collapsed="true">
+    <Position X="10" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3f" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3d" Collapsed="true">
+    <Position X="4" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3" Collapsed="true">
+    <Position X="4" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3i" Collapsed="true">
+    <Position X="10" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3u" Collapsed="true">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3f" Collapsed="true">
+    <Position X="7" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3d" Collapsed="true">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3iArray" Collapsed="true">
+    <Position X="44.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3uArray" Collapsed="true">
+    <Position X="46.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3fArray" Collapsed="true">
+    <Position X="53.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec3dArray" Collapsed="true">
+    <Position X="51.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3iArray" Collapsed="true">
+    <Position X="51.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3uArray" Collapsed="true">
+    <Position X="53.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3fArray" Collapsed="true">
+    <Position X="50" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pos3dArray" Collapsed="true">
+    <Position X="48.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vector3.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="LineAlgorithm" Collapsed="true">
+    <Position X="48.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgACAEAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>CG2DRenderContext.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FillAlgorithm" Collapsed="true">
+    <Position X="46.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCAIABAAAIAAAAAQRAAAAgAAACAAAAA=</HashCode>
+      <FileName>CG2DRenderContext.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommandType" Collapsed="true">
+    <Position X="44.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABEAwASgCAAAEAsAACCAIAAQIBQCAEEAAkUBEAAII=</HashCode>
+      <FileName>UIEventListener.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
