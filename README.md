@@ -25,6 +25,7 @@
 - 图形和图像的交互式编辑
 
 <img src="fig/3.png" style="zoom:20%;" />
+
 ## 安装指南
 
 本项目需要配置Visual Studio环境，并安装OpenGL库。具体步骤如下：
